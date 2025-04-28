@@ -3,6 +3,8 @@
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\VideoController;
+use App\Models\CreateEdit;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +19,4 @@ use App\Http\Controllers\VideoController;
 
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/video',[VideoController::class,'index']);
+Route::get('/creat-edit',[CreateEdit::class, 'index']); 

@@ -17,7 +17,8 @@
     
         @include ('header')
         
-        <h1>KPlays</h1>
+        
+        <h1>KPlay</h1>
         
         @yield ('page-container')
     </div>       
