@@ -13,7 +13,7 @@
         <a class="nav-link" href="#">Usuários</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Vídeos</a>
+        <a class="nav-link" href="/video">Vídeos</a>
       </li>
       <li class="nav-item">
         <a class="nav-link disabled" href="#">Playlists</a>

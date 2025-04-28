@@ -16,10 +16,9 @@
     <div class="container">
     
         @include ('header')
+        
         <h1>KPlays</h1>
-
-        <h1>Example heading <span class="badge bg-secondary">New</span></h1>
-    
+        
         @yield ('page-container')
     </div>       
         

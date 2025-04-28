@@ -15,7 +15,9 @@ class VideoController extends Controller
      */
     public function index()
     {
-        //
+        $video = Video::where("id", 1)->get();
+
+        return view('pages.video.video');
     }
 
     /**
