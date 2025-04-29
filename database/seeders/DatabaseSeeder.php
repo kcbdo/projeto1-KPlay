@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
+use App\Models\Video;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,6 +15,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+
+        // $this->call([
+        //     UserSeeder::class,
+        //     VideoSeeder::class,
+        // ]);
+
+        User::factory()->count(10)->create();
+        Video::factory()->count(10)->create();
+
     }
 }

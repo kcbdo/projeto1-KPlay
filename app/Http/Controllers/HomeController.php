@@ -9,7 +9,6 @@ class HomeController extends Controller
 {
     
     public function index() {
-
         $users = User::where("id", 1)->get();
 
         "select * from users";
