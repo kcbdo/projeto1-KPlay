@@ -6,6 +6,8 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use App\Models\User; 
+
 
 class VideoSeeder extends Seeder
 {
@@ -16,14 +18,14 @@ class VideoSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('video')->insert([
-            'ID' => Str::random(10),
-            'Título' => Str::random(10).'@example.com',
-            'Estilo' => Str::random(10),
-            'Criado por' => Str::random(10),
-            'Visualizações' => Str::random(10),
-
+        DB::table('videos')->insert([
+            'title'=> Str::random(100),
+            'link'=> Str::random(100),
+            'duration' => rand(1, 300),
+            'description' => Str::random(500),
+            'user_id'=> User::inRandomOrder()->first()->id,
             
+
         ]);
     }
 }
