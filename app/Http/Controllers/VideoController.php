@@ -15,9 +15,9 @@ class VideoController extends Controller
      */
     public function index()
     {
-        $video = Video::where("id", 1)->get();
+        $videos = Video::all();
 
-        return view('pages.video.video');
+        return view('pages.video.video',compact('videos'));
     }
 
     /**
