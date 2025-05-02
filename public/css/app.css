@@ -1,4 +1,4 @@
-/* ESTILOS DA TABELA DE VÍDEOS */
+/* ESTILOS DA TABELA DE VÍDEOS
 
 
 .table {
@@ -50,7 +50,7 @@
 }
 
 /* BOTÃO CRIAR VÍDEO E RETORNAR PARA PÁGINA INICIAL */
-a.btn-link {
+/* a.btn-link {
   display: flex;
   align-items: flex-end;
   padding: 8px 12px;
@@ -65,4 +65,4 @@ a.btn-link:hover {
   display: flex; 
   background-color: #5a6268;
   color: #fff;
-}
+} */ 

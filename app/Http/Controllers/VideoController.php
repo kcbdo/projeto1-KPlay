@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreVideoRequest;
 use App\Http\Requests\UpdateVideoRequest;
+use App\Models\User;
 use App\Models\Video;
 
 class VideoController extends Controller
@@ -16,8 +17,12 @@ class VideoController extends Controller
     public function index()
     {
         $videos = Video::all();
+        
+        $data = [
+            'videos' => $videos,
+        ];
 
-        return view('pages.video.video',compact('videos'));
+        return view('pages.video.video', $data);
     }
 
     /**

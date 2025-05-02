@@ -21,8 +21,8 @@ class DatabaseSeeder extends Seeder
         //     VideoSeeder::class,
         // ]);
 
-        User::factory()->count(10)->create();
-        Video::factory()->count(10)->create();
+        User::factory()->count(100)->create();
+        Video::factory()->count(1000)->create();
 
     }
 }
