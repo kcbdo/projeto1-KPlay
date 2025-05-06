@@ -27,7 +27,12 @@
 			</tr>
 		@endforeach
 	</tbody>
+	
 </table>
+
+		{{ $videos->links() }}
+
+
 <a href="/create-edit" class="btn btn-secondary btn-sm text-white">Criar vídeo</a>
 
 <a href="/" class="btn btn-secondary btn-sm text-white">Retornar para a página inicial</a>

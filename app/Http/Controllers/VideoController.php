@@ -6,6 +6,7 @@ use App\Http\Requests\StoreVideoRequest;
 use App\Http\Requests\UpdateVideoRequest;
 use App\Models\User;
 use App\Models\Video;
+use  Illuminate\Pagination\PaginationServiceProvider;
 
 class VideoController extends Controller
 {
@@ -16,7 +17,7 @@ class VideoController extends Controller
      */
     public function index()
     {
-        $videos = Video::all();
+        $videos = Video::simplePaginate(10);
         
         $data = [
             'videos' => $videos,

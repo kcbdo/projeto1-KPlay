@@ -66,3 +66,8 @@ a.btn-link:hover {
   background-color: #5a6268;
   color: #fff;
 } */ 
+.pagination svg {
+  width: 16px !important;
+  height: 16px !important;
+  vertical-align: middle;
+}
