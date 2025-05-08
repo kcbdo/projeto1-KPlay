@@ -1,11 +1,20 @@
 @extends('template')
 @section('page-container')
 
-<table class="table mt-3">
+<h1>Video</h1>
 
+<table class="table mt-3">
+<form class="form-inline">
+  <div class="form-group mx-sm-3 mb-2">
+    <label class="sr-only">Pesquisar</label>
+    <input type="password" class="form-control" id="inputPassword2" placeholder="Pesquise aqui">
+  </div>
+  <button type="submit" class="btn btn-primary mb-2">Pesquisar</button>
+</form>
 	<thead class="thead-dark">
 
 		<tr>
+			
 			<th scope="col">ID</th>
 			<th scope="col">Título</th>
 			<th scope="col">Link</th>
@@ -30,8 +39,7 @@
 	
 </table>
 
-		{{ $videos->links() }}
-
+<div class="pagination">{{ $videos->links() }}</div>
 
 <a href="/create-edit" class="btn btn-secondary btn-sm text-white">Criar vídeo</a>
 
