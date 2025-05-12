@@ -20,14 +20,19 @@ class VideoController extends Controller
     public function index(Request $request)
     {
         
-        $videos = Video::paginate(10);
-
-        
-        $data = [
+     $pesquisar= $request->pesquisar; 
+     $videos= Video::where(function($query) use ($pesquisar)
+        {
+            $query->where('title', 'like', '%'.$pesquisar.'%');
+            
+        })->paginate(10);
+    
+    $data = [
             'videos' => $videos,
-        ];
-
-        return view('pages.video.video', $data);
+            'pesquisar' => $pesquisar,
+    ];
+    
+    return view('pages.video.video', $data);
     }
 
     /**

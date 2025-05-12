@@ -4,13 +4,19 @@
 <h1>Video</h1>
 
 <table class="table mt-3">
-<form class="form-inline">
-  <div class="form-group mx-sm-3 mb-2">
-    <label class="sr-only">Pesquisar</label>
-    <input type="password" class="form-control" id="inputPassword2" placeholder="Pesquise aqui">
-  </div>
-  <button type="submit" class="btn btn-primary mb-2">Pesquisar</button>
-</form>
+
+	<div class=card-body>
+		<form action="{{route('pages.video.video')}}" method="GET">
+			<div class="row">
+				<div class="col-md-6 col-sm-12">
+					<label class="form-label" for="pesquisar">Pesquisar</label>
+					<input type="text" name="pesquisar" class="form-control" placeholder="Pesquise aqui">
+				</div>
+				<div class="col-md-6 col-sm-12 mt-1 pt-1">
+					<button type="submit" class="btn btn-info btn">Pesquisar</button>
+				</div>
+			</div>
+		</form>
 	<thead class="thead-dark">
 
 		<tr>
