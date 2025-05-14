@@ -6,7 +6,7 @@
 <table class="table mt-3">
 
 	<div class=card-body>
-		<form action="{{route('pages.video.video')}}" method="GET">
+		<form action="{{route('video.index')}}" method="GET">
 			<div class="row">
 				<div class="col-md-6 col-sm-12">
 					<label class="form-label" for="pesquisar">Pesquisar</label>
@@ -47,7 +47,7 @@
 
 <div class="pagination">{{ $videos->links() }}</div>
 
-<a href="/create-edit" class="btn btn-secondary btn-sm text-white">Criar vídeo</a>
+<a href="{{ route('video.form') }}" class="btn btn-secondary btn-sm text-white">Criar vídeo</a>
 
 <a href="/" class="btn btn-secondary btn-sm text-white">Retornar para a página inicial</a>
 

@@ -23,7 +23,7 @@ class VideoController extends Controller
      $pesquisar= $request->pesquisar; 
      $videos= Video::where(function($query) use ($pesquisar)
         {
-            $query->where('title', 'like', '%'.$pesquisar.'%');
+            $query->where('title', 'ilike', '%'.$pesquisar.'%');
             
         })->paginate(10);
     
@@ -40,9 +40,9 @@ class VideoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function form()
     {
-        //
+        return view('pages.video.create-edit');
     }
 
     /**

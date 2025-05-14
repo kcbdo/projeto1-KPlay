@@ -18,5 +18,5 @@ use App\Models\CreateEdit;
 */
 
 Route::get('/', [HomeController::class, 'index']);
-Route::get('/video',[VideoController::class,'index'])->name('pages.video.video');
-Route::get('/creat-edit',[CreateEdit::class, 'index']); 
+Route::get('/video',[VideoController::class,'index'])->name('video.index');
+Route::get('/creat-edit',[VideoController::class, 'form'])->name('video.form');
