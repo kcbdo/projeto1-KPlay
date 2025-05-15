@@ -2,6 +2,8 @@
 @section('page-container')
 
 <h1>Video</h1>
+<a href="/" class="btn btn-secondary btn-sm text-white">Retornar para a página inicial</a>
+<a href="{{ route('video.form') }}" class="btn btn-secondary btn-sm text-white">Criar vídeo</a>
 
 <table class="table mt-3">
 
@@ -9,7 +11,7 @@
 		<form action="{{route('video.index')}}" method="GET">
 			<div class="row">
 				<div class="col-md-6 col-sm-12">
-					<label class="form-label" for="pesquisar">Pesquisar</label>
+					
 					<input type="text" name="pesquisar" class="form-control" placeholder="Pesquise aqui">
 				</div>
 				<div class="col-md-6 col-sm-12 mt-1 pt-1">
@@ -45,10 +47,6 @@
 	
 </table>
 
-<div class="pagination">{{ $videos->links() }}</div>
-
-<a href="{{ route('video.form') }}" class="btn btn-secondary btn-sm text-white">Criar vídeo</a>
-
-<a href="/" class="btn btn-secondary btn-sm text-white">Retornar para a página inicial</a>
+<div class="pagination">{{ $videos->appends(request()->input())->links() }}</div>
 
 @endsection
