@@ -4,7 +4,9 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use App\Models\Video;
+use App\Models\Category;
 use Illuminate\Database\Seeder;
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -23,6 +25,9 @@ class DatabaseSeeder extends Seeder
 
         User::factory()->count(100)->create();
         Video::factory()->count(1000)->create();
+        $this->call([
+            CategorySeeder::class,
+        ]);
 
     }
 }

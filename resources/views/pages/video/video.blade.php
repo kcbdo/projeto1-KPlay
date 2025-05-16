@@ -12,7 +12,7 @@
 			<div class="row">
 				<div class="col-md-6 col-sm-12">
 					
-					<input type="text" name="pesquisar" class="form-control" placeholder="Pesquise aqui">
+					<input type="text" name="pesquisar" class="form-control" placeholder="Busque por título">
 				</div>
 				<div class="col-md-6 col-sm-12 mt-1 pt-1">
 					<button type="submit" class="btn btn-info btn">Pesquisar</button>
