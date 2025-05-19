@@ -14,11 +14,9 @@ class CreateVideoCategoriesTable extends Migration
     public function up()
     {
         Schema::create('video_categories', function (Blueprint $table) {
-            $table->id();
             $table->foreignId('categories_id')->constrained();
             $table->foreignId('videos_id')->constrained('videos');
-            $table->boolean('active')->default(true); 
-            $table->timestamps();
+           
         });
     }
 

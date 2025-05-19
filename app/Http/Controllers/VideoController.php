@@ -22,8 +22,8 @@ class VideoController extends Controller
         
         $pesquisar= $request->pesquisar; 
 
-        $videos= Video::where('title', 'ilike', '%'.$pesquisar.'%')
-        ->orWhere("description", 'ilike', '%'.$pesquisar.'%')
+        $videos= Video::where('title', 'like', '%'.$pesquisar.'%')
+        ->orWhere("description", 'like', '%'.$pesquisar.'%')
         ->paginate(10);
         
         $data = [
@@ -52,7 +52,17 @@ class VideoController extends Controller
      */
     public function store(StoreVideoRequest $request)
     {
-        //
+        
+        $video = new Video;
+        $video->title = $request->input('titulo');
+        $video->description = $request->input('descricao');
+        $video->link = $request->input('link');
+        $video->duration = $request->input('duration'); 
+        $video->user_id = 1; 
+        $video->save();
+
+        return redirect()->route('home'); 
+
     }
 
     /**
@@ -98,5 +108,9 @@ class VideoController extends Controller
     public function destroy(Video $video)
     {
         //
+    }
+    public function joinVideo($id)
+    {
+                
     }
 }
