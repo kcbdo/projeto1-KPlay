@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\VideoController;
@@ -21,3 +22,5 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/video',[VideoController::class,'index'])->name('video.index');
 Route::get('/creat-edit',[VideoController::class, 'form'])->name('video.form');
 Route::post('/store',[VideoController::class, 'store'])->name('video.store'); 
+
+Route::get('/categories', [CategoryController::class, 'index'])->name('categorias'); 

@@ -20,10 +20,8 @@ class CreateVideosTable extends Migration
             $table->string('link', 100); 
             $table->time('duration'); 
             $table->text('description'); 
-            $table->unsignedInteger('user_id'); 
+            $table->unsignedInteger('user_id');
             $table->timestamps(); 
-
-
             $table->foreign("user_id")->references("id")->on("users")->onDelete("cascade");
             
         });

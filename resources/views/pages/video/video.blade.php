@@ -19,6 +19,8 @@
 				</div>
 			</div>
 		</form>
+	</div>
+
 	<thead class="thead-dark">
 
 		<tr>
@@ -28,6 +30,7 @@
 			<th scope="col">Link</th>
 			<th scope="col">Duração</th>
 			<th scope="col">Descrição</th>
+			<th scope="col">Categoria</th>
 		</tr>
 
 	</thead>
@@ -35,12 +38,18 @@
 	<tbody>
 
 		@foreach($videos as $video)
-			<tr>
+		
+		<tr>
 				<td scope="col">{{ $video->id }}</td>
 				<td scope="col">{{ $video->title }}</td>
 				<td scope="col">{{ $video->link }}</td>
 				<td scope="col">{{ $video->duration }}</td>
 				<td scope="col">{{ $video->description }}</td>
+				<td scope="col">
+				@foreach ($video->categories as $category)
+    				{{ $category->name }}
+				@endforeach	
+				</td>
 			</tr>
 		@endforeach
 	</tbody>

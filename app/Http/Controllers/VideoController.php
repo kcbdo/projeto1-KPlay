@@ -22,8 +22,9 @@ class VideoController extends Controller
         
         $pesquisar= $request->pesquisar; 
 
-        $videos= Video::where('title', 'like', '%'.$pesquisar.'%')
-        ->orWhere("description", 'like', '%'.$pesquisar.'%')
+        $videos= Video::where('title', 'ilike', '%'.$pesquisar.'%')
+        ->orWhere("description", 'ilike', '%'.$pesquisar.'%')
+        ->with('categories')
         ->paginate(10);
         
         $data = [
@@ -58,9 +59,8 @@ class VideoController extends Controller
         $video->description = $request->input('descricao');
         $video->link = $request->input('link');
         $video->duration = $request->input('duration'); 
-        $video->user_id = 1; 
+        $video->user_id = 1;
         $video->save();
-
         return redirect()->route('home'); 
 
     }
