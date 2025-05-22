@@ -15,9 +15,12 @@ class CreateCategoriesVideosTable extends Migration
     {
         Schema::create('categories_videos', function (Blueprint $table){
             $table->id();
-            $table->foreignId('category_id')->constrained();
-            $table->foreignId('video_id')->constrained('videos');
+            $table->unsignedInteger('category_id');
+            $table->unsignedInteger('video_id');
             $table->timestamps();
+
+            $table->foreign('category_id')->references("id")->on("categories")->onDelete("cascade");
+            $table->foreign('video_id')->references("id")->on("videos")->onDelete("cascade");
 
         });
     }

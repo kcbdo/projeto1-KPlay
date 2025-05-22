@@ -21,6 +21,8 @@ use App\Models\CreateEdit;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/video',[VideoController::class,'index'])->name('video.index');
 Route::get('/creat-edit',[VideoController::class, 'form'])->name('video.form');
-Route::post('/store',[VideoController::class, 'store'])->name('video.store'); 
+
+Route::post('/video',[VideoController::class, 'insert'])->name('video.insert'); 
+Route::put('/video',[VideoController::class, 'update'])->name('video.update'); 
 
 Route::get('/categories', [CategoryController::class, 'index'])->name('categorias'); 
