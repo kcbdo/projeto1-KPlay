@@ -28,8 +28,8 @@ class VideoController extends Controller
     {
         $pesquisar= $request->pesquisar; 
 
-        $videos= Video::where('title', 'ilike', '%'.$pesquisar.'%')
-        ->orWhere("description", 'ilike', '%'.$pesquisar.'%')
+        $videos= Video::where('title', 'like', '%'.$pesquisar.'%')
+        ->orWhere("description", 'like', '%'.$pesquisar.'%')
         ->with('categories')
         ->paginate(10);
         
@@ -49,19 +49,20 @@ class VideoController extends Controller
     public function form()
     {
         $categories = Category::all();
-        return view('pages.video.create-edit');
+        return view('pages.video.create-edit', compact('categories'));
     }
 
     private function validation(Request $request) {
 
-        $validator = Validator::make( $request->all(), [
-            'title' => 'required|unique|max:100',
-            'description' => 'required|unique|max:500',
-            'link' => 'required|unique|max:100',
-            'duration'=> 'required', 
-        ]);
-        
-        return $validator;
+        $request->validate([
+        'titulo' => 'max:100',
+        'descricao' => 'max:500',
+        'link' => 'max:255',
+    ], [
+        'titulo.max' => 'O título não pode ter mais que 100 caracteres.',
+        'descricao.max' => 'A descrição não pode ter mais que 500 caracteres.',
+        'link.max' => 'O link não pode ter mais que 255 caracteres.',
+    ]);
        
     }
 

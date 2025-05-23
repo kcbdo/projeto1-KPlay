@@ -2,6 +2,15 @@
 @section('page-container')
 
 <h1>Criar vídeo</h1>
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 
 <form action="{{route('video.insert') }}" method="POST">
     @csrf
@@ -21,11 +30,12 @@
         <label for="duration">Duração</label>
         <input type="time" name="duration" class="form-control" placeholder="Ex: 10:45" required>
     </div>
-    <div class="form-group">
-        <label for="duration">Categorias</label>
-        <select name="select">
-        type="text"
-
+   <div class="form-group">
+        <label for="categories">Categorias</label>
+        <select name="categories[]" id="categories" class="form-control" multiple>
+            @foreach($categories as $category)
+                <option value="{{ $category->id }}">{{ $category->name }}</option>
+            @endforeach
         </select>
     </div>
 
