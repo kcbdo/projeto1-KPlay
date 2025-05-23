@@ -28,8 +28,8 @@ class VideoController extends Controller
     {
         $pesquisar= $request->pesquisar; 
 
-        $videos= Video::where('title', 'like', '%'.$pesquisar.'%')
-        ->orWhere("description", 'like', '%'.$pesquisar.'%')
+        $videos= Video::where('title', 'ilike', '%'.$pesquisar.'%')
+        ->orWhere("description", 'ilike', '%'.$pesquisar.'%')
         ->with('categories')
         ->paginate(10);
         
@@ -41,29 +41,15 @@ class VideoController extends Controller
         return view('pages.video.video', $data);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function form()
-    {
-        $categories = Category::all();
-        return view('pages.video.create-edit', compact('categories'));
+
+    public function create() {
+        
+        return $this->form(new Video());
     }
 
-    private function validation(Request $request) {
-
-        $request->validate([
-        'titulo' => 'max:100',
-        'descricao' => 'max:500',
-        'link' => 'max:255',
-    ], [
-        'titulo.max' => 'O título não pode ter mais que 100 caracteres.',
-        'descricao.max' => 'A descrição não pode ter mais que 500 caracteres.',
-        'link.max' => 'O link não pode ter mais que 255 caracteres.',
-    ]);
-       
+    public function edit(int $id) {
+        return view ('pages.video.creat-edit'); 
+        return $this->form();
     }
 
     /**
@@ -71,14 +57,13 @@ class VideoController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return mixed|\Illuminate\Http\RedirectResponse
      */
-    public function insert(Request $request)
+    public function insert(Request $request): void
     {        
 
         $validator = $this->validation($request);
 
         $video = new Video;
         $this->save($video, $request);
-        return redirect()->route('home'); 
     }
 
     /**
@@ -86,11 +71,12 @@ class VideoController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return mixed|\Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request)
+    public function update($id, Request $request): void
     {
+        $validator = $this->validation($request);
+
         $video = Video::where("id", $request->id)->first();
         $this->save($video, $request);
-        return redirect()->route('home'); 
     }
 
     /**
@@ -108,6 +94,30 @@ class VideoController extends Controller
         $video->save();  
          
 
+    }
+
+    private function form(Video $video) {
+        $data = [
+            'videos' => $video,
+        ];
+
+        
+
+        return view ('pages.video.create-edit', $data) ;
+    }
+
+    private function validation(Request $request) {
+
+        $request->validate([
+        'titulo' => 'max:100',
+        'descricao' => 'max:500',
+        'link' => 'max:255',
+    ], [
+        'titulo.max' => 'O título não pode ter mais que 100 caracteres.',
+        'descricao.max' => 'A descrição não pode ter mais que 500 caracteres.',
+        'link.max' => 'O link não pode ter mais que 255 caracteres.',
+    ]);
+       
     }
 
 }

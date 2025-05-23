@@ -24,24 +24,14 @@ class StoreVideoRequest extends FormRequest
     public function rules()
     {
         return [
-            'titulo' => 'required|string|max:100',
-            'descricao' => 'required|string|max:500',
-            'link' => 'required|url|max:100',
-            'duration' => 'required',
-            'categories' => 'nullable|array',
-            'categories.*' => 'exists:categories,id',
+            
         ];
     }
 
     public function messages(): array
     {
         return [
-            'titulo.required' => 'O campo título é obrigatório.',
-            'descricao.required' => 'O campo descrição é obrigatório.',
-            'link.required' => 'O link é obrigatório.',
-            'link.url' => 'O link deve ser uma URL válida.',
-            'duration.required' => 'A duração é obrigatória.',
-            'categories.*.exists' => 'Uma das categorias selecionadas não existe.',
+            
         ];
     }
     
