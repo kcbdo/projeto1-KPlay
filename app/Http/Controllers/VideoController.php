@@ -12,10 +12,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Validation\ValidationException;
-use Illuminate\Foundation\Http\FormRequest; 
-
-
-
+use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class VideoController extends Controller
 {
@@ -28,8 +26,8 @@ class VideoController extends Controller
     {
         $pesquisar= $request->pesquisar; 
 
-        $videos= Video::where('title', 'like', '%'.$pesquisar.'%')
-        ->orWhere("description", 'like', '%'.$pesquisar.'%')
+        $videos= Video::where('title', 'ilike', '%'.$pesquisar.'%')
+        ->orWhere("description", 'ilike', '%'.$pesquisar.'%')
         ->with('categories')
         ->paginate(10);
         
@@ -46,19 +44,19 @@ class VideoController extends Controller
         
         $categories = Category::all(); 
         return view('pages.video.create-edit', [
-        'video' => new Video(), 
-        'categories' => $categories
-    ]);
+            'video' => new Video(), 
+            'categories' => $categories
+        ]);
     }
 
     public function edit(int $id) {
         $video = Video::findOrFail($id);
         $categories = Category::all();
 
-    return view('pages.video.create-edit', [
-        'video' => $video,
-        'categories' => $categories
-    ]);
+        return view('pages.video.create-edit', [
+            'video' => $video,
+            'categories' => $categories
+        ]);
     }
 
     /**
@@ -73,7 +71,7 @@ class VideoController extends Controller
 
         $video = new Video;
         $this->save($video, $request);
-         return redirect()->route('video.index'); 
+        return redirect()->route('video.index'); 
     }
 
     /**
@@ -120,15 +118,19 @@ class VideoController extends Controller
 
     private function validation(Request $request) {
 
-        $request->validate([
-        'titulo' => 'max:100',
-        'descricao' => 'max:500',
-        'link' => 'max:255',
-    ], [
-        'titulo.max' => 'O título não pode ter mais que 100 caracteres.',
-        'descricao.max' => 'A descrição não pode ter mais que 500 caracteres.',
-        'link.max' => 'O link não pode ter mais que 255 caracteres.',
-    ]);
+        $validation = $request->validate([
+            'titulo' => 'required|string|max:100',
+            'link' => 'required|string|max:100',
+            "duration" => "required|".Rule::time()->format('HH:MM:SS'),
+            'descricao' => 'required|string|max:500',
+            "user_id" => "nullable|integer|exists:users,id"
+        ], [
+            'titulo.max' => 'O título não pode ter mais que 100 caracteres.',
+            'descricao.max' => 'A descrição não pode ter mais que 500 caracteres.',
+            'link.max' => 'O link não pode ter mais que 255 caracteres.',
+        ]);
+
+        return $validation;
        
     }
 
