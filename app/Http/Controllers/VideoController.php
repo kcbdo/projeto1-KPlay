@@ -28,8 +28,8 @@ class VideoController extends Controller
     {
         $pesquisar= $request->pesquisar; 
 
-        $videos= Video::where('title', 'ilike', '%'.$pesquisar.'%')
-        ->orWhere("description", 'ilike', '%'.$pesquisar.'%')
+        $videos= Video::where('title', 'like', '%'.$pesquisar.'%')
+        ->orWhere("description", 'like', '%'.$pesquisar.'%')
         ->with('categories')
         ->paginate(10);
         
@@ -44,12 +44,21 @@ class VideoController extends Controller
 
     public function create() {
         
-        return $this->form(new Video());
+        $categories = Category::all(); 
+        return view('pages.video.create-edit', [
+        'video' => new Video(), 
+        'categories' => $categories
+    ]);
     }
 
     public function edit(int $id) {
-        return view ('pages.video.creat-edit'); 
-        return $this->form();
+        $video = Video::findOrFail($id);
+        $categories = Category::all();
+
+    return view('pages.video.create-edit', [
+        'video' => $video,
+        'categories' => $categories
+    ]);
     }
 
     /**
@@ -57,13 +66,14 @@ class VideoController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return mixed|\Illuminate\Http\RedirectResponse
      */
-    public function insert(Request $request): void
+    public function insert(Request $request):  RedirectResponse
     {        
 
         $validator = $this->validation($request);
 
         $video = new Video;
         $this->save($video, $request);
+         return redirect()->route('video.index'); 
     }
 
     /**
@@ -71,7 +81,7 @@ class VideoController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return mixed|\Illuminate\Http\RedirectResponse
      */
-    public function update($id, Request $request): void
+    public function update($id, Request $request): RedirectResponse
     {
         $validator = $this->validation($request);
 
@@ -97,8 +107,10 @@ class VideoController extends Controller
     }
 
     private function form(Video $video) {
+        $categories = Category::all();
         $data = [
             'videos' => $video,
+            'categories'=> $categories, 
         ];
 
         

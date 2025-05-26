@@ -3,7 +3,7 @@
 
 <h1>Video</h1>
 <a href="/" class="btn btn-secondary btn-sm text-white">Retornar para a página inicial</a>
-<a href="{{ route('video.form') }}" class="btn btn-secondary btn-sm text-white">Criar vídeo</a>
+<a href="{{ route('video.create') }}" class="btn btn-secondary btn-sm text-white">Criar vídeo</a>
 
 <table class="table mt-3">
 
@@ -56,7 +56,7 @@
 				@endforeach	
 				</td>
 				<td scope="col">
-					<a href="{{ '/' }}"> 
+					<a href="{{ route('video.edit', $video->id) }}"> 
 						<i class="fa-solid fa-pen"></i>
 					</a>	
 				</td>

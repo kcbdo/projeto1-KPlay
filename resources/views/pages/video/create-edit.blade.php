@@ -1,7 +1,15 @@
 @extends('template')
 @section('page-container')
 
-<h1>Criar vídeo</h1>
+@if ($video->id)
+        <h1>Editar Vídeo</h1>
+        <form action="{{ route('video.update', $video->id) }}" method="POST">
+        @method('PUT')
+@else
+        <h1>Criar Vídeo</h1>
+        <form action="{{ route('video.insert') }}" method="POST">
+@endif
+
 @if ($errors->any())
     <div class="alert alert-danger">
         <ul>
@@ -11,6 +19,7 @@
         </ul>
     </div>
 @endif
+
 
 <form action="{{route('video.insert') }}" method="POST">
     @csrf
