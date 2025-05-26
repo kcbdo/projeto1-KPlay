@@ -64,14 +64,18 @@ class VideoController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return mixed|\Illuminate\Http\RedirectResponse
      */
-    public function insert(Request $request):  RedirectResponse
+    public function insert(Request $request)
     {        
-
         $validator = $this->validation($request);
+        
+        if (!$validator->fails()) {
+            $video = new Video;
+            $this->save($video, $request);
+            return redirect()->route('video.index'); 
+        }
 
-        $video = new Video;
-        $this->save($video, $request);
-        return redirect()->route('video.index'); 
+        $error = $validator->errors()->first();
+        return response("Não foi possível criar o vídeo: $error");
     }
 
     /**
@@ -79,11 +83,12 @@ class VideoController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return mixed|\Illuminate\Http\RedirectResponse
      */
-    public function update($id, Request $request): RedirectResponse
+    public function update($id, Request $request)
     {
         $validator = $this->validation($request);
 
         $video = Video::where("id", $request->id)->first();
+        Video::find(2);
         $this->save($video, $request);
     }
 
@@ -118,10 +123,10 @@ class VideoController extends Controller
 
     private function validation(Request $request) {
 
-        $validation = $request->validate([
+        $validation = Validator::make($request->all(), [
             'titulo' => 'required|string|max:100',
             'link' => 'required|string|max:100',
-            "duration" => "required|".Rule::time()->format('HH:MM:SS'),
+            "duration" => "required",
             'descricao' => 'required|string|max:500',
             "user_id" => "nullable|integer|exists:users,id"
         ], [
@@ -131,7 +136,6 @@ class VideoController extends Controller
         ]);
 
         return $validation;
-       
     }
 
 }
