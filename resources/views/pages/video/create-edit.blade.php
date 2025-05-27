@@ -19,9 +19,6 @@
         </ul>
     </div>
 @endif
-
-
-<form action="{{route('video.insert') }}" method="POST">
     @csrf
     <div class="form-group">
         <label for="exampleInputEmail1">Título</label>
@@ -43,15 +40,18 @@
         <label for="categories">Categorias</label>
         <select name="categories[]" id="categories" class="form-control" multiple>
             @foreach($categories as $category)
-                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                <option value="{{ $category->id }}"
+                {{ in_array($category->id, old('categories', $video->categories->pluck('id')->toArray() ?? [])) ? 'selected' : '' }}>
+                {{ $category->name }}
+        </option>
             @endforeach
         </select>
     </div>
 
     <br>
-    
-  
-  <button type="submit" class="btn btn-primary">Criar</button>
+<button type="submit" class="btn btn-primary">
+    {{ $video->id ? 'Atualizar' : 'Criar' }}
+</button>    
 </form>
 
 @endsection

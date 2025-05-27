@@ -26,8 +26,8 @@ class VideoController extends Controller
     {
         $pesquisar= $request->pesquisar; 
 
-        $videos= Video::where('title', 'ilike', '%'.$pesquisar.'%')
-        ->orWhere("description", 'ilike', '%'.$pesquisar.'%')
+        $videos= Video::where('title', 'like', '%'.$pesquisar.'%')
+        ->orWhere("description", 'like', '%'.$pesquisar.'%')
         ->with('categories')
         ->paginate(10);
         
@@ -71,10 +71,16 @@ class VideoController extends Controller
         if (!$validator->fails()) {
             $video = new Video;
             $this->save($video, $request);
+            
+        if ($request->has('categories')) {
+            $video->categories()->sync($request->input('categories'));
+        }
             return redirect()->route('video.index'); 
+
         }
 
         $error = $validator->errors()->first();
+        
         return response("Não foi possível criar o vídeo: $error");
     }
 
@@ -86,10 +92,19 @@ class VideoController extends Controller
     public function update($id, Request $request)
     {
         $validator = $this->validation($request);
-
+        
+        if (!$validator->fails()){
         $video = Video::where("id", $request->id)->first();
         Video::find(2);
         $this->save($video, $request);
+        
+        if ($request->has('categories')) {
+            $video->categories()->sync($request->input('categories'));
+        }
+        return redirect ()-> route('video.index');
+        }
+        $error = $validator->errors()->first();
+        return response ("Não foi possível atualizar o vídeo: $error");
     }
 
     /**
