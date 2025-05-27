@@ -26,9 +26,10 @@ class VideoController extends Controller
     {
         $pesquisar= $request->pesquisar; 
 
-        $videos= Video::where('title', 'like', '%'.$pesquisar.'%')
-        ->orWhere("description", 'like', '%'.$pesquisar.'%')
+        $videos= Video::where('title', 'ilike', '%'.$pesquisar.'%')
+        ->orWhere("description", 'ilike', '%'.$pesquisar.'%')
         ->with('categories')
+        ->orderBy('id')
         ->paginate(10);
         
         $data = [
@@ -43,6 +44,7 @@ class VideoController extends Controller
     public function create() {
         
         $categories = Category::all(); 
+        
         return view('pages.video.create-edit', [
             'video' => new Video(), 
             'categories' => $categories
@@ -50,7 +52,9 @@ class VideoController extends Controller
     }
 
     public function edit(int $id) {
-        $video = Video::findOrFail($id);
+        
+        $video = Video::find($id);
+        
         $categories = Category::all();
 
         return view('pages.video.create-edit', [
@@ -94,16 +98,18 @@ class VideoController extends Controller
         $validator = $this->validation($request);
         
         if (!$validator->fails()){
-        $video = Video::where("id", $request->id)->first();
-        Video::find(2);
-        $this->save($video, $request);
+            $video = Video::where("id", $request->id)->first();
+            Video::find(2);
+            $this->save($video, $request);
         
         if ($request->has('categories')) {
             $video->categories()->sync($request->input('categories'));
         }
         return redirect ()-> route('video.index');
         }
+        
         $error = $validator->errors()->first();
+
         return response ("Não foi possível atualizar o vídeo: $error");
     }
 
@@ -120,12 +126,11 @@ class VideoController extends Controller
         $video->duration = $request->duration;
         $video->user_id = 1;
         $video->save();  
-         
-
     }
 
     private function form(Video $video) {
         $categories = Category::all();
+        
         $data = [
             'videos' => $video,
             'categories'=> $categories, 

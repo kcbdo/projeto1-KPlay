@@ -33,9 +33,6 @@
 			<th scope="col">Categoria</th>
 			<th scope="col">Editar</th>
 			
-			
-			
-
 		</tr>
 
 	</thead>
@@ -44,10 +41,10 @@
 
 		@foreach($videos as $video)
 		
-		<tr>
+			<tr>
 				<td scope="col">{{ $video->id }}</td>
 				<td scope="col">{{ $video->title }}</td>
-				<td scope="col">{{ $video->link }}</td>
+				<td scope="col"><a href="{{ $video->link }}" target="_blank">{{ $video->link }}></a></td>
 				<td scope="col">{{ $video->duration }}</td>
 				<td scope="col">{{ $video->description }}</td>
 				<td scope="col">

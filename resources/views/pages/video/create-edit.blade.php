@@ -2,12 +2,12 @@
 @section('page-container')
 
 @if ($video->id)
-        <h1>Editar Vídeo</h1>
-        <form action="{{ route('video.update', $video->id) }}" method="POST">
-        @method('PUT')
+    <h1>Editar Vídeo</h1>
+    <form action="{{ route('video.update', $video->id) }}" method="POST">
+    @method('PUT')
 @else
-        <h1>Criar Vídeo</h1>
-        <form action="{{ route('video.insert') }}" method="POST">
+    <h1>Criar Vídeo</h1>
+    <form action="{{ route('video.insert') }}" method="POST">
 @endif
 
 @if ($errors->any())
@@ -22,19 +22,23 @@
     @csrf
     <div class="form-group">
         <label for="exampleInputEmail1">Título</label>
-        <input type="text" name ="titulo" class="form-control" placeholder="Digite o título do vídeo"required>
+        <input type="text" name ="titulo" class="form-control" value="{{ old('titulo', $video->title ?? '') }}"
+        placeholder="Digite o título do vídeo" required>
     </div>
     <div class="form-group">
         <label for="exampleInputEmail1">Descrição</label>
-        <input type="text" name="descricao" class="form-control"  placeholder="Digite a descrição do vídeo" required>
+        <input type="text" name="descricao" class="form-control"  value="{{ old('descricao', $video->description ?? '')}}"
+        placeholder="Digite a descrição do vídeo" required>
     </div>
     <div class="form-group">
         <label for="link">Link</label>
-        <input type="text" name="link" class="form-control" placeholder="Digite o link do vídeo" required>
+        <input type="text" name="link" class="form-control" value="{{ old('link', $video->link ?? '')}}"
+        placeholder="Digite o link do vídeo" required>
     </div>
     <div class="form-group">
         <label for="duration">Duração</label>
-        <input type="time" name="duration" class="form-control" placeholder="Ex: 10:45" required>
+        <input type="time" name="duration" class="form-control" value="{{ old('duration', $video->duration ?? '')}}"
+         required>
     </div>
    <div class="form-group">
         <label for="categories">Categorias</label>
@@ -43,15 +47,16 @@
                 <option value="{{ $category->id }}"
                 {{ in_array($category->id, old('categories', $video->categories->pluck('id')->toArray() ?? [])) ? 'selected' : '' }}>
                 {{ $category->name }}
-        </option>
+                </option>
             @endforeach
         </select>
     </div>
 
     <br>
-<button type="submit" class="btn btn-primary">
-    {{ $video->id ? 'Atualizar' : 'Criar' }}
-</button>    
+    <button type="submit" class="btn btn-primary">
+        {{ $video->id ? 'Atualizar' : 'Criar' }}
+    </button> 
+    <a href={{  route('video.index')}} class="btn btn-primary">Voltar</a>
 </form>
 
 @endsection

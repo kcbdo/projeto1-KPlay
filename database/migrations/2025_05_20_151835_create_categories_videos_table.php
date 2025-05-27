@@ -14,13 +14,14 @@ class CreateCategoriesVideosTable extends Migration
     public function up()
     {
         Schema::create('categories_videos', function (Blueprint $table){
-            $table->id();
+            
             $table->unsignedInteger('category_id');
             $table->unsignedInteger('video_id');
             $table->timestamps();
 
             $table->foreign('category_id')->references("id")->on("categories")->onDelete("cascade");
             $table->foreign('video_id')->references("id")->on("videos")->onDelete("cascade");
+            $table->primary(['category_id', 'video_id']);
 
         });
     }
