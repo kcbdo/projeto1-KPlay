@@ -2,3 +2,44 @@
     width: 45px;
     height: 45px;
 }
+
+h1{
+    font-size: 22px; 
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+.btn-secondary{
+    color: white;
+    background-color: #606060;
+    border-radius:8px; 
+    
+}
+.btn-info{
+    color: white;
+    background-color: #606060;
+    border-radius:8px;
+    
+}
+.btn-primary{
+     color: white;
+    background-color: #606060;
+    border-radius:8px;
+}
+.search-container{
+    display:flex; 
+    gap: 10px;
+    text-align: center;
+}
+.fa-pen{
+    color: #606060; 
+}
+.pagination{
+
+}
+.navbar-brand{
+    background-color: #ddae20ce;
+    border-radius: 16px;
+    width: 100px;
+    text-align: center;
+}

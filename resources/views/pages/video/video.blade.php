@@ -2,20 +2,19 @@
 @section('page-container')
 
 <h1>Video</h1>
+<div class ="search-container">
 <a href="/" class="btn btn-secondary btn-sm text-white">Retornar para a página inicial</a>
 <a href="{{ route('video.create') }}" class="btn btn-secondary btn-sm text-white">Criar vídeo</a>
+</div>
 
 <table class="table mt-3">
 
 	<div class=card-body>
 		<form action="{{route('video.index')}}" method="GET">
 			<div class="row">
-				<div class="col-md-6 col-sm-12">
-					
+				<div class="search-container">
 					<input type="text" name="pesquisar" class="form-control" placeholder="Busque por título">
-				</div>
-				<div class="col-md-6 col-sm-12 mt-1 pt-1">
-					<button type="submit" class="btn btn-info btn">Pesquisar</button>
+					<button type="submit" class="btn btn-secondary btn">Pesquisar</button>
 				</div>
 			</div>
 		</form>
