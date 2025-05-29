@@ -25,6 +25,6 @@ Route::get('video/create', [VideoController::class, 'create'])->name('video.crea
 Route::get('/video/{id}/edit', [VideoController::class, 'edit'])->name('video.edit');
 
 Route::post('/video',[VideoController::class, 'insert'])->name('video.insert'); 
-Route::put('/video/update/{id}',[VideoController::class, 'update'])->name('video.update'); 
+Route::put('/video',[VideoController::class, 'update'])->name('video.update'); 
 
 Route::get('/categories', [CategoryController::class, 'index'])->name('categorias'); 

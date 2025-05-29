@@ -3,8 +3,9 @@
 
 @if ($video->id)
     <h1>Editar Vídeo</h1>
-    <form action="{{ route('video.update', $video->id) }}" method="POST">
+    <form action="{{ route('video.update') }}" method="POST">
     @method('PUT')
+    <input type="hidden" name="id" class="form-control" value="{{ $video->id }}">
 @else
     <h1>Criar Vídeo</h1>
     <form action="{{ route('video.insert') }}" method="POST">
@@ -20,14 +21,15 @@
     </div>
 @endif
     @csrf
+
     <div class="form-group">
         <label for="exampleInputEmail1">Título</label>
-        <input type="text" name ="titulo" class="form-control" value="{{ old('titulo', $video->title ?? '') }}"
+        <input type="text" name ="title" class="form-control" value="{{ old('title', $video->title ?? '') }}"
         placeholder="Digite o título do vídeo" required>
     </div>
     <div class="form-group">
         <label for="exampleInputEmail1">Descrição</label>
-        <input type="text" name="descricao" class="form-control"  value="{{ old('descricao', $video->description ?? '')}}"
+        <input type="text" name="description" class="form-control"  value="{{ old('description', $video->description ?? '')}}"
         placeholder="Digite a descrição do vídeo" required>
     </div>
     <div class="form-group">

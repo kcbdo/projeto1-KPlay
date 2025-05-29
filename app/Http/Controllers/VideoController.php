@@ -26,8 +26,8 @@ class VideoController extends Controller
     {
         $pesquisar= $request->pesquisar; 
 
-        $videos= Video::where('title', 'like', '%'.$pesquisar.'%')
-        ->orWhere("description", 'like', '%'.$pesquisar.'%')
+        $videos= Video::where('title', 'ilike', '%'.$pesquisar.'%')
+        ->orWhere("description", 'ilike', '%'.$pesquisar.'%')
         ->with('categories')
         ->orderBy('id')
         ->paginate(10);
@@ -75,12 +75,7 @@ class VideoController extends Controller
         if (!$validator->fails()) {
             $video = new Video;
             $this->save($video, $request);
-            
-        if ($request->has('categories')) {
-            $video->categories()->sync($request->input('categories'));
-        }
             return redirect()->route('video.index'); 
-
         }
 
         $error = $validator->errors()->first();
@@ -93,19 +88,15 @@ class VideoController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return mixed|\Illuminate\Http\RedirectResponse
      */
-    public function update($id, Request $request)
+    public function update(Request $request)
     {
         $validator = $this->validation($request);
         
         if (!$validator->fails()){
             $video = Video::where("id", $request->id)->first();
-            Video::find(2);
+            // $video = Video::find($request->id);
             $this->save($video, $request);
-        
-        if ($request->has('categories')) {
-            $video->categories()->sync($request->input('categories'));
-        }
-        return redirect ()-> route('video.index');
+            return redirect ()-> route('video.index');
         }
         
         $error = $validator->errors()->first();
@@ -120,12 +111,17 @@ class VideoController extends Controller
      * @return void
      */
     private function save(Video $video, Request $request): void {
-        $video->title = $request->titulo;
-        $video->description = $request->descricao;
+        $video->title = $request->title;
+        $video->description = $request->description;
         $video->link = $request->link;
         $video->duration = $request->duration;
         $video->user_id = 1;
         $video->save();  
+
+        if ($request->categories) {
+            // TODO refazer de forma leiga (criar e remover cada registro de video_categories)
+            $video->categories()->sync($request->categories);
+        }
     }
 
     private function form(Video $video) {
@@ -144,14 +140,14 @@ class VideoController extends Controller
     private function validation(Request $request) {
 
         $validation = Validator::make($request->all(), [
-            'titulo' => 'required|string|max:100',
+            'title' => 'required|string|max:100',
             'link' => 'required|string|max:100',
             "duration" => "required",
-            'descricao' => 'required|string|max:500',
+            'description' => 'required|string|max:500',
             "user_id" => "nullable|integer|exists:users,id"
         ], [
-            'titulo.max' => 'O título não pode ter mais que 100 caracteres.',
-            'descricao.max' => 'A descrição não pode ter mais que 500 caracteres.',
+            'title.max' => 'O título não pode ter mais que 100 caracteres.',
+            'description.max' => 'A descrição não pode ter mais que 500 caracteres.',
             'link.max' => 'O link não pode ter mais que 255 caracteres.',
         ]);
 
