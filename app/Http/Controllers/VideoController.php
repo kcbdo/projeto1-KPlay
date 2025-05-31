@@ -14,6 +14,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\DB;
 
 class VideoController extends Controller
 {
@@ -26,8 +27,8 @@ class VideoController extends Controller
     {
         $pesquisar= $request->pesquisar; 
 
-        $videos= Video::where('title', 'ilike', '%'.$pesquisar.'%')
-        ->orWhere("description", 'ilike', '%'.$pesquisar.'%')
+        $videos= Video::where('title', 'like', '%'.$pesquisar.'%')
+        ->orWhere("description", 'like', '%'.$pesquisar.'%')
         ->with('categories')
         ->orderBy('id')
         ->paginate(10);
@@ -119,9 +120,32 @@ class VideoController extends Controller
         $video->save();  
 
         if ($request->categories) {
-            // TODO refazer de forma leiga (criar e remover cada registro de video_categories)
-            $video->categories()->sync($request->categories);
+            DB::table('categories_videos')->where('video_id', $video->id)->delete();
+             foreach ($request->categories as $categoryId) {
+                 DB::table('categories_videos')->insert([
+                    'video_id' => $video->id,
+                    'category_id' => $categoryId,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+            ]);
         }
+    }   else 
+        {
+            DB::table('categories_videos')->where('video_id', $video->id)->delete();
+        }
+            
+            // TODO refazer de forma leiga (criar e remover cada registro de categories_videos)
+            //$video->categories()->sync($request->categories);
+        
+    }
+    public function delete (int $id) {
+        $video = Video::find($id);
+        if ($video){
+            DB::table('categories_videos')->where('video_id', $id)->delete();
+            $video->delete();
+            return redirect()->route('video.index')->with('sucess', 'Vídeo deletado com sucesso!');
+        }
+
     }
 
     private function form(Video $video) {

@@ -31,9 +31,7 @@ h1{
     gap: 10px;
     text-align: center;
 }
-.fa-pen{
-    color: #606060; 
-}
+
 .pagination{
 
 }
@@ -43,3 +41,20 @@ h1{
     width: 100px;
     text-align: center;
 }
+
+
+.fa-pen{
+     color: #606060; 
+     float: right; 
+     margin-top: 6px;
+}
+.fa-trash{
+    color: #606060; 
+    float: right; 
+}
+.btn-link{
+    color: #606060; 
+    float: right; 
+    m;
+    
+}   

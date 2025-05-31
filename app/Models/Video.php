@@ -17,5 +17,21 @@ class Video extends Model
     {
         return $this->belongsToMany(Category::class, 'categories_videos');
     }
+    public static function getVideos ($pesquisar = null)
+    {
+        $query = self::from ('videos as v')
+            ->leftJoin ('categories_videos as cv', 'cv.video_id','=', 'v.id')
+            ->leftJoin ('categories as c', 'c.id', '=', 'cv.category_id')
+            ->select ('v.*', 'c.name as category_name');
+        if ($pesquisar) 
+        {
+            $query->where(function($q) use ($pesquisar)
+            {
+                $q->where('v.title', 'like', "%$pesquisar%")
+                  ->orWhere('v.description', 'like', "%$pesquisar%");
+            });
+        }
+        return $query->orderBy('v.id')->paginate(10);
+    }
 
 }

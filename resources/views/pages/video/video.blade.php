@@ -14,7 +14,7 @@
 			<div class="row">
 				<div class="search-container">
 					<input type="text" name="pesquisar" class="form-control" placeholder="Busque por título">
-					<button type="submit" class="btn btn-secondary btn">Pesquisar</button>
+					<button type="submit" class="btn btn-secondary btn-sm btn">Pesquisar</button>
 				</div>
 			</div>
 		</form>
@@ -31,7 +31,7 @@
 			<th scope="col">Descrição</th>
 			<th scope="col">Categoria</th>
 			<th scope="col">Editar</th>
-			
+			<th scope="col">Excluir</th>
 		</tr>
 
 	</thead>
@@ -55,6 +55,15 @@
 					<a href="{{ route('video.edit', $video->id) }}"> 
 						<i class="fa-solid fa-pen"></i>
 					</a>	
+				</td>
+				<td scope="col">
+					<form action="{{ route('video.delete', $video->id) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-link" onclick="return confirm('Tem certeza que deseja excluir este vídeo?')">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+                </form>
 				</td>
 			</tr>
 		@endforeach

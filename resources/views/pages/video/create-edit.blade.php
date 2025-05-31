@@ -55,10 +55,10 @@
     </div>
 
     <br>
-    <button type="submit" class="btn btn-secondary">
+    <button type="submit" class="btn btn-secondary btn-sm">
         {{ $video->id ? 'Atualizar' : 'Criar' }}
     </button> 
-    <a href={{  route('video.index')}} class="btn btn-secondary">Voltar</a>
+    <a href={{  route('video.index')}} class="btn btn-secondary btn-sm">Voltar</a>
 </form>
 
 @endsection
