@@ -27,11 +27,7 @@ class VideoController extends Controller
     {
         $pesquisar= $request->pesquisar; 
 
-        $videos= Video::where('title', 'like', '%'.$pesquisar.'%')
-        ->orWhere("description", 'like', '%'.$pesquisar.'%')
-        ->with('categories')
-        ->orderBy('id')
-        ->paginate(10);
+        $videos= Video::getVideos($pesquisar); 
         
         $data = [
             'videos' => $videos,
@@ -119,15 +115,17 @@ class VideoController extends Controller
         $video->user_id = 1;
         $video->save();  
 
-        if ($request->categories) {
+        if ($request->categories) 
+        {
             DB::table('categories_videos')->where('video_id', $video->id)->delete();
-             foreach ($request->categories as $categoryId) {
+             foreach ($request->categories as $categoryId) 
+             {
                  DB::table('categories_videos')->insert([
                     'video_id' => $video->id,
                     'category_id' => $categoryId,
                     'created_at' => now(),
                     'updated_at' => now(),
-            ]);
+                ]);
         }
     }   else 
         {
@@ -143,7 +141,7 @@ class VideoController extends Controller
         if ($video){
             DB::table('categories_videos')->where('video_id', $id)->delete();
             $video->delete();
-            return redirect()->route('video.index')->with('sucess', 'Vídeo deletado com sucesso!');
+            return redirect()->route('video.index')->with('success', 'Vídeo deletado com sucesso!');
         }
 
     }

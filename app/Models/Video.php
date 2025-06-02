@@ -22,7 +22,8 @@ class Video extends Model
         $query = self::from ('videos as v')
             ->leftJoin ('categories_videos as cv', 'cv.video_id','=', 'v.id')
             ->leftJoin ('categories as c', 'c.id', '=', 'cv.category_id')
-            ->select ('v.*', 'c.name as category_name');
+            ->select ('v.*', 'c.name as category_name')
+            ->groupBy('v.id', 'v.title', 'v.description', 'v.created_at', 'v.updated_at');
         if ($pesquisar) 
         {
             $query->where(function($q) use ($pesquisar)
@@ -31,7 +32,7 @@ class Video extends Model
                   ->orWhere('v.description', 'like', "%$pesquisar%");
             });
         }
-        return $query->orderBy('v.id')->paginate(10);
+        return $query->orderBy('id')->paginate(10);
     }
 
 }

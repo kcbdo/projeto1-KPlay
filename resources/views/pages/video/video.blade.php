@@ -36,14 +36,14 @@
 
 	</thead>
 
-	<tbody>
+	<tbody class="kit-kat">
 
 		@foreach($videos as $video)
 		
 			<tr>
 				<td scope="col">{{ $video->id }}</td>
 				<td scope="col">{{ $video->title }}</td>
-				<td scope="col"><a href="{{ $video->link }}" target="_blank">{{ $video->link }}></a></td>
+				<td scope="col"><a href="{{ $video->link }}" class="kit-kit" target="_blank">{{ $video->link }}></a></td>
 				<td scope="col">{{ $video->duration }}</td>
 				<td scope="col">{{ $video->description }}</td>
 				<td scope="col">
@@ -63,7 +63,7 @@
                     <button type="submit" class="btn btn-link" onclick="return confirm('Tem certeza que deseja excluir este vídeo?')">
                         <i class="fa-solid fa-trash"></i>
                     </button>
-                </form>
+                	</form>
 				</td>
 			</tr>
 		@endforeach
