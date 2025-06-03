@@ -7,6 +7,7 @@
 <a href="{{ route('video.create') }}" class="btn btn-secondary btn-sm text-white">Criar vídeo</a>
 </div>
 
+
 <table class="table mt-3">
 
 	<div class=card-body>
@@ -41,22 +42,22 @@
 		@foreach($videos as $video)
 		
 			<tr>
-				<td scope="col">{{ $video->id }}</td>
-				<td scope="col">{{ $video->title }}</td>
-				<td scope="col"><a href="{{ $video->link }}" class="kit-kit" target="_blank">{{ $video->link }}></a></td>
-				<td scope="col">{{ $video->duration }}</td>
-				<td scope="col">{{ $video->description }}</td>
-				<td scope="col">
+				<td>{{ $video->id }}</td>
+				<td>{{ $video->title }}</td>
+				<td><a href="{{ 'https://www.youtube.com/watch?v='.$video->link }}" class="kit-kit" target="_blank">{{ 'https://www.youtube.com/watch?v='.$video->link }}</a></td>
+				<td>{{ $video->duration }}</td>
+				<td>{{ $video->description }}</td>
+				<td>
 				@foreach ($video->categories as $category)
     				{{ $category->name }}
 				@endforeach	
 				</td>
-				<td scope="col">
+				<td>
 					<a href="{{ route('video.edit', $video->id) }}"> 
 						<i class="fa-solid fa-pen"></i>
 					</a>	
 				</td>
-				<td scope="col">
+				<td>
 					<form action="{{ route('video.delete', $video->id) }}" method="POST">
                     @csrf
                     @method('DELETE')

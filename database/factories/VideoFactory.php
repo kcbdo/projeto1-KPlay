@@ -27,7 +27,7 @@ class VideoFactory extends Factory
 
         return [
             'title' => $this->faker->title(),
-            'link' => "https://www.youtube.com/watch?v=H8tLS_NOWLs&list=RDxj_T9T9j_aE&index=10",
+            'link' => "H8tLS_NOWLs&",
             'duration'=> $this->faker->time(),
             'description'=> $this->faker->text(500),
             'user_id' => $user->id

@@ -1,7 +1,8 @@
 @extends('template')
 @section('page-container')
 
-@if ($video->id)
+@if ( isset($video) && $video->id)
+dd($video)
     <h1>Editar Vídeo</h1>
     <form action="{{ route('video.update') }}" method="POST">
     @method('PUT')

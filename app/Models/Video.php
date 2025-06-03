@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Category;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\DB;
 
 class Video extends Model
 {
@@ -17,22 +18,26 @@ class Video extends Model
     {
         return $this->belongsToMany(Category::class, 'categories_videos');
     }
-    public static function getVideos ($pesquisar = null)
+    public static function scopeGetVideos ($query, $pesquisar = null)
     {
-        $query = self::from ('videos as v')
-            ->leftJoin ('categories_videos as cv', 'cv.video_id','=', 'v.id')
+        $query
+            ->leftJoin ('categories_videos as cv', 'cv.video_id','=', 'videos.id')
             ->leftJoin ('categories as c', 'c.id', '=', 'cv.category_id')
-            ->select ('v.*', 'c.name as category_name')
-            ->groupBy('v.id', 'v.title', 'v.description', 'v.created_at', 'v.updated_at');
+            ->select ('videos.*', DB::raw('json_agg(c.name)'))
+            ->groupBy('videos.id', );
+
         if ($pesquisar) 
         {
             $query->where(function($q) use ($pesquisar)
             {
-                $q->where('v.title', 'like', "%$pesquisar%")
-                  ->orWhere('v.description', 'like', "%$pesquisar%");
+                $q->where('videos.title', 'ilike', "%$pesquisar%")
+                  ->orWhere('videos.description', 'ilike', "%$pesquisar%");
             });
         }
+
         return $query->orderBy('id')->paginate(10);
+
+        
     }
 
 }

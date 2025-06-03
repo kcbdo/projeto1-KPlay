@@ -89,12 +89,19 @@ class VideoController extends Controller
     {
         $validator = $this->validation($request);
         
+        $video = Video::where("id", $request->id)->first();
+        
+        if (!$video) 
+        {
+            return redirect()->back()->with('error', 'Vídeo não encontrado.');
+        }
         if (!$validator->fails()){
             $video = Video::where("id", $request->id)->first();
             // $video = Video::find($request->id);
             $this->save($video, $request);
             return redirect ()-> route('video.index');
         }
+        
         
         $error = $validator->errors()->first();
 
@@ -137,6 +144,7 @@ class VideoController extends Controller
         
     }
     public function delete (int $id) {
+        
         $video = Video::find($id);
         if ($video){
             DB::table('categories_videos')->where('video_id', $id)->delete();
@@ -150,7 +158,7 @@ class VideoController extends Controller
         $categories = Category::all();
         
         $data = [
-            'videos' => $video,
+            'video' => $video,
             'categories'=> $categories, 
         ];
 
