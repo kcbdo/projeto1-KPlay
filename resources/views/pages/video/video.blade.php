@@ -1,6 +1,10 @@
 @extends('template')
 @section('page-container')
 
+@if(session('error'))
+    <div class="alert alert-danger">{{ session('error') }}</div>
+@endif
+
 <h1>Video</h1>
 <div class ="search-container">
 <a href="/" class="btn btn-secondary btn-sm text-white">Retornar para a página inicial</a>

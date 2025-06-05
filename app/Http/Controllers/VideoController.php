@@ -51,6 +51,13 @@ class VideoController extends Controller
     public function edit(int $id) {
         
         $video = Video::find($id);
+
+        if (!$video)
+        {
+            return redirect()-> route('video.index')
+            ->with ('error', 'Vídeo não encontrado!'); 
+        } 
+       
         
         $categories = Category::all();
 
@@ -93,7 +100,9 @@ class VideoController extends Controller
         
         if (!$video) 
         {
-            return redirect()->back()->with('error', 'Vídeo não encontrado.');
+            return redirect()->back()
+            ->withInput()
+            ->with('error', 'Vídeo não encontrado.');
         }
         if (!$validator->fails()){
             $video = Video::where("id", $request->id)->first();
