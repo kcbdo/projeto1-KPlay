@@ -28,4 +28,8 @@ Route::post('/video',[VideoController::class, 'insert'])->name('video.insert');
 Route::put('/video',[VideoController::class, 'update'])->name('video.update');
 Route::delete('/video/{id}', [VideoController::class, 'delete'])->name('video.delete');  
 
-Route::get('/categories', [CategoryController::class, 'index'])->name('categorias'); 
+Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index'); 
+Route::get('categories/create', [CategoryController::class, 'create' ])->name('categories.create'); 
+Route::get('categories/{id}/edit', [CategoryController::class, 'edit' ])->name('categories.edit'); 
+
+Route::post('/video', [CategoryController::class, 'insert'])->name('categories.insert'); 

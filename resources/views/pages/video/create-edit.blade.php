@@ -2,7 +2,6 @@
 @section('page-container')
 
 @if ( isset($video) && $video->id)
-dd($video)
     <h1>Editar Vídeo</h1>
     <form action="{{ route('video.update') }}" method="POST">
     @method('PUT')

@@ -131,25 +131,23 @@ class VideoController extends Controller
         $video->user_id = 1;
         $video->save();  
 
-        if ($request->categories) 
-        {
+        if ($request->categories) {
             DB::table('categories_videos')->where('video_id', $video->id)->delete();
-             foreach ($request->categories as $categoryId) 
-             {
-                 DB::table('categories_videos')->insert([
+            foreach ($request->categories as $categoryId) {
+                DB::table('categories_videos')->insert([
                     'video_id' => $video->id,
                     'category_id' => $categoryId,
                     'created_at' => now(),
                     'updated_at' => now(),
                 ]);
-        }
-    }   else 
-        {
+            }
+
+        } else {
             DB::table('categories_videos')->where('video_id', $video->id)->delete();
         }
             
-            // TODO refazer de forma leiga (criar e remover cada registro de categories_videos)
-            //$video->categories()->sync($request->categories);
+        // TODO refazer de forma leiga (criar e remover cada registro de categories_videos)
+        //$video->categories()->sync($request->categories);
         
     }
     public function delete (int $id) {
@@ -178,6 +176,7 @@ class VideoController extends Controller
 
     private function validation(Request $request) {
 
+        // TODO validar o tipo horário
         $validation = Validator::make($request->all(), [
             'title' => 'required|string|max:100',
             'link' => 'required|string|max:100',

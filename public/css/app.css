@@ -16,6 +16,7 @@ h1{
     background-color: #606060;
     border-radius:8px; 
     
+    
 }
 .btn-info{
     color: white;
@@ -34,9 +35,7 @@ h1{
     text-align: center;
 }
 
-.pagination{
 
-}
 .navbar-brand{
     background-color: #ddae20ce;
     border-radius: 16px;
@@ -85,4 +84,18 @@ a.kit-kit{
     transition: all 0.2s ease;
     position: relative;
     top: -9px;
+}
+.card-buttons{
+    display: flex; 
+    justify-content: space-between;
+
+
+}
+.btn-kat{
+    color: white;
+    background-color: #606060;
+    border-radius:8px; 
+    margin-top: 8px; 
+    
+
 }
