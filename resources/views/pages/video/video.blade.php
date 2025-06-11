@@ -78,6 +78,6 @@
 	
 </table>
 
-<div class="pagination">{{ $videos->appends(request()->input())->links() }}</div>
+<div class="pagination">{{ $videos->appends(request()->input())->links('pagination::bootstrap-4') }}</div>
 
 @endsection

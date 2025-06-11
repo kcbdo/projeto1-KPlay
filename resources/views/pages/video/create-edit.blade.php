@@ -1,8 +1,9 @@
 @extends('template')
 @section('page-container')
-
+<div class="card-header">
 @if ( isset($video) && $video->id)
     <h1>Editar Vídeo</h1>
+    
     <form action="{{ route('video.update') }}" method="POST">
     @method('PUT')
     <input type="hidden" name="id" class="form-control" value="{{ $video->id }}">
@@ -19,9 +20,11 @@
             @endforeach
         </ul>
     </div>
+    </div>
 @endif
-    @csrf
 
+    @csrf
+    <div class="card-body">
     <div class="form-group">
         <label for="exampleInputEmail1">Título</label>
         <input type="text" name ="title" class="form-control" value="{{ old('title', $video->title ?? '') }}"
@@ -53,7 +56,7 @@
             @endforeach
         </select>
     </div>
-
+    </div>
     <br>
     <button type="submit" class="btn btn-secondary btn-sm">
         {{ $video->id ? 'Atualizar' : 'Criar' }}

@@ -17,5 +17,13 @@ class Category extends Model
     public function videos(): BelongsToMany    
     {
         return $this->belongsToMany(Video::class,'categories_videos');
-    }    
+    } 
+    public static function scopeGetCategories($query, $pesquisar = null)
+    {
+        if ($pesquisar) {
+        $query->where('name', 'ilike', "%$pesquisar%");
+    }
+
+        return $query->orderBy('name')->paginate(10);
+    }   
 }

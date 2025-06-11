@@ -32,4 +32,4 @@ Route::get('/categories', [CategoryController::class, 'index'])->name('categorie
 Route::get('categories/create', [CategoryController::class, 'create' ])->name('categories.create'); 
 Route::get('categories/{id}/edit', [CategoryController::class, 'edit' ])->name('categories.edit'); 
 
-Route::post('/video', [CategoryController::class, 'insert'])->name('categories.insert'); 
+Route::post('/categories', [CategoryController::class, 'insert'])->name('categories.insert'); 

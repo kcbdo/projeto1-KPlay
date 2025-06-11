@@ -99,3 +99,27 @@ a.kit-kit{
     
 
 }
+.page-link{
+    
+    color: white;
+    background-color: #858585;
+    border-radius: 6px;
+
+}
+.pagination{
+    justify-content: center;
+}
+.page-item.active .page-link {
+    color: black; 
+    background-color: #ddd;
+}
+.page-link:hover{
+    color: black; 
+    background-color: #ddd;
+}
+.card-header{
+    position: relative;
+    margin-top: 10px;
+    margin-right: 10px;
+    border-radius: 16px;
+}

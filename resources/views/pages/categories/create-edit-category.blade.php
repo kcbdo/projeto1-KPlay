@@ -22,9 +22,11 @@
 @endif
     @csrf
     <div class="form-group">
+        <div class="card-header">
         <label>Nome</label>
         <input type="text" name ="name" class="form-control" value="{{ old('name', $category->name ?? '') }}"
         placeholder="Digite o nome da categoria" required>
+        </div>
     </div>
     <button type="submit" class="btn btn-kat btn-sm">
     {{ $categories->id ? 'Atualizar' : 'Criar' }}
