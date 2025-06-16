@@ -123,3 +123,19 @@ a.kit-kit{
     margin-right: 10px;
     border-radius: 16px;
 }
+td, th {
+  vertical-align: middle; 
+  text-align: center; 
+}
+
+.btn-icon, a.btn-edit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;  
+  height: 32px; 
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+}

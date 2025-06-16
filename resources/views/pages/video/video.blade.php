@@ -6,9 +6,9 @@
 @endif
 
 <h1>Video</h1>
-<div class ="search-container">
-<a href="/" class="btn btn-secondary btn-sm text-white">Retornar para a página inicial</a>
-<a href="{{ route('video.create') }}" class="btn btn-secondary btn-sm text-white">Criar vídeo</a>
+<div class="card-buttons">
+    <a href="/" class="btn btn-secondary btn-sm text-white">Retornar para a página inicial</a>
+    <a href="{{ route('video.create') }}" class="btn btn-secondary btn-sm text-white">Criar vídeo</a>
 </div>
 
 
@@ -28,7 +28,6 @@
 	<thead class="thead-dark">
 
 		<tr>
-			
 			<th scope="col">ID</th>
 			<th scope="col">Título</th>
 			<th scope="col">Link</th>
@@ -42,9 +41,7 @@
 	</thead>
 
 	<tbody class="kit-kat">
-
 		@foreach($videos as $video)
-		
 			<tr>
 				<td>{{ $video->id }}</td>
 				<td>{{ $video->title }}</td>
@@ -57,7 +54,7 @@
 				@endforeach	
 				</td>
 				<td>
-					<a href="{{ route('video.edit', $video->id) }}"> 
+					<a href="{{ route('video.edit', $video->id) }}" title="Editar" class="btn-edit"> 
 						<i class="fa-solid fa-pen"></i>
 					</a>	
 				</td>
@@ -78,6 +75,8 @@
 	
 </table>
 
-<div class="pagination">{{ $videos->appends(request()->input())->links('pagination::bootstrap-4') }}</div>
+<div class="card-footer">
+	{{ $videos->appends(request()->input())->links('pagination::bootstrap-4') }}
+</div>
 
 @endsection

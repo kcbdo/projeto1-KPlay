@@ -14,61 +14,90 @@ use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    
+    public function index(Request $request)
     {
-        $categories = Category::getCategories();
+        $pesquisar= $request->pesquisar; 
+        $categories = Category::getCategories($pesquisar);
 
-        return view('pages.categories.categories', compact('categories')); 
+        return view('pages.categories.categories', ['categories' => $categories]); 
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function create()
     {
-        $video = Video::all(); 
-        
         return view('pages.categories.create-edit-category', [
             'categories' => new Category(), 
-            'video' => $video
+        ]);
+    }
+    
+     public function edit(int $id) {
+        
+        $category = Category::find($id);
+
+        if (!$category)
+        {
+            return redirect()-> route('categories.index')
+            ->with ('error', 'Categoria não encontrada!'); 
+        }
+        return view('pages.categories.create-edit-category', [
+            'category' => $category, 
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreCategoryRequest  $request
-     * @return \Illuminate\Http\Response
-     */
     public function insert(Request $request)
-{        
-    $validator = $this->validation($request);
-    
-    if (Category::whereRaw('LOWER(name) = ?', [strtolower($request->name)])->exists()) {
-        return back()
-            ->withErrors(['name' => 'Já existe uma categoria com esse nome.'])
-            ->withInput();
-    }
-    
-    if (!$validator->fails()) {
-        $category = new Category;
-        $this->save($category, $request);
-        return redirect()->route('categories.index'); 
+    {        
+        $validator = $this->validation($request);
+
+        if (Category::where('name', 'ILIKE', $request->name)->exists()) {
+            return back()
+                ->withErrors(['name' => 'Já existe uma categoria com esse nome.'])
+                ->withInput();
+        }
+        if (!$validator->fails()) {
+            $category = new Category;
+            $this->save($category, $request);
+            return redirect()->route('categories.index'); 
+        }
+
+        $error = $validator->errors()->first();
+
+        return response("Não foi possível criar a categoria: $error");
     }
 
-    $error = $validator->errors()->first();
-    
-    return response("Não foi possível criar a categoria: $error");
-}
+    public function update(Request $request)
+    {
+        $validator = $this->validation($request);
+        $categories = Category::where("id", $request->id)->first();
+        
+        if (!$categories) 
+        {
+            return redirect()->back()
+            ->withInput()
+            ->with('error', 'Categoria não encontrada.');
+        }
+        if (!$validator->fails()){
+            $this->save($categories, $request);
+            return redirect ()-> route('categories.index');
+        }
+        
+        
+        $error = $validator->errors()->first();
 
-    private function validation(Request $request) {
+        return response ("Não foi possível atualizar a categoria: $error");
+    }
+
+    public function delete (int $id) 
+    {
+        $categories = Category::find($id);
+        if ($categories){
+            $categories->delete();
+            return redirect()->route('categories.index')->with('success', 'Categoria deletada com sucesso!');
+        }
+    }
+
+    private function validation(Request $request) 
+    {
 
         $validation = Validator::make($request->all(), [
             'name' => 'required|string|max:100',
@@ -78,7 +107,9 @@ class CategoryController extends Controller
 
         return $validation;
     }
-    private function save(Category $category, Request $request): void {
+    
+    private function save(Category $category, Request $request): void 
+    {
         $category->name = $request->name;
         $category->save();     
     }

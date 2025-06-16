@@ -30,8 +30,8 @@ class Video extends Model
         {
             $query->where(function($q) use ($pesquisar)
             {
-                $q->where('videos.title', 'ilike', "%$pesquisar%")
-                  ->orWhere('videos.description', 'ilike', "%$pesquisar%");
+                $q->where('videos.title', 'like', "%$pesquisar%")
+                  ->orWhere('videos.description', 'like', "%$pesquisar%");
             });
         }
 
