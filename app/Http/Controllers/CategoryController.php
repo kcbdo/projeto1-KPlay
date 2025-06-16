@@ -68,32 +68,39 @@ class CategoryController extends Controller
     public function update(Request $request)
     {
         $validator = $this->validation($request);
-        $categories = Category::where("id", $request->id)->first();
-        
+
+        if ($validator->fails()) 
+        {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $categories = Category::find($request->id);
+
         if (!$categories) 
         {
             return redirect()->back()
-            ->withInput()
-            ->with('error', 'Categoria não encontrada.');
+                ->withInput()
+                ->with('error', 'Categoria não encontrada.');
         }
-        if (!$validator->fails()){
-            $this->save($categories, $request);
-            return redirect ()-> route('categories.index');
-        }
-        
-        
-        $error = $validator->errors()->first();
 
-        return response ("Não foi possível atualizar a categoria: $error");
+        $this->save($categories, $request);
+
+        return redirect()->route('categories.index')
+        ->with('success', 'Categoria atualizada com sucesso!');
     }
 
     public function delete (int $id) 
     {
         $categories = Category::find($id);
+        
         if ($categories){
             $categories->delete();
             return redirect()->route('categories.index')->with('success', 'Categoria deletada com sucesso!');
         }
+         return redirect()->route('categories.index')
+        ->with('error', 'Categoria não encontrada.');
     }
 
     private function validation(Request $request) 
