@@ -5,7 +5,7 @@
     <div class="alert alert-danger">{{ session('error') }}</div>
 @endif
     
-<h1>Categorias</h1>
+<h1>Categoria</h1>
 
 <div class="card-buttons">
     <a href="/" class="btn btn-secondary btn-sm text-white">Retornar para a página inicial</a>

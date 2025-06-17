@@ -8,6 +8,7 @@ use App\Models\Category;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\DB;
+use App\Models\Playlist; 
 
 class Video extends Model
 {
@@ -38,6 +39,10 @@ class Video extends Model
         return $query->orderBy('id')->paginate(10);
 
         
+    }
+    public function playlists(): BelongsToMany
+    {
+        return $this->belongsToMany(Playlist::class, 'videos_playlists'); 
     }
 
 }
