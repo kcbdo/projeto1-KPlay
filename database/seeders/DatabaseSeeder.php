@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
         Video::factory()->count(1000)->create();
         $this->call([
             CategorySeeder::class,
+            PlaylistSeeder::class,
         ]);
 
     }
