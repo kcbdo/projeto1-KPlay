@@ -29,9 +29,8 @@
         <th scope="col">ID</th>
         <th scope="col">Título</th>
         <th scope="col">Pública?</th>
-        <th scope="col">Editar</th>
         <th scope="col">Visualizar playlist</th>
-        <th scope="col">Excluir</th>
+        <th scope="col">Ações</th>
     </tr>
 </thead>
 
@@ -41,25 +40,29 @@
             <td>{{ $playlist->id }}</td>
             <td>{{ $playlist->title }}</td>
             <td>{{ $playlist->is_public ? 'Sim' : 'Não' }}</td>
-            <td>
-                <a href="{{ route('playlists.edit', $playlist->id) }}" title="Editar" class="btn-edit">
-                    <i class="fa-solid fa-pen"></i>
+             <td>
+                <a href="{{ route('playlists.show', $playlist->id) }}" class="btn btn-secondary btn-sm">
+                    <i class="fa-solid fa-eye mr-1"></i> Visualizar
                 </a>
             </td>
             <td>
-                <a href="{{ route('playlists.show', $playlist->id) }}" class="btn btn-sm btn-secondary">
-                    <i class="fa-solid fa-eye"></i>
-                </a>
-
-            </td>
-            <td>
-                <form action="{{ route('playlists.delete', $playlist->id) }}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-link" onclick="return confirm('Tem certeza que deseja excluir esta playlist?')">
-                        <i class="fa-solid fa-trash"></i>
+                <div class="dropdown">
+                    <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton{{ $playlist->id }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Ações
                     </button>
-                </form>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton{{ $playlist->id }}">
+                        <a class="dropdown-item" href="{{ route('playlists.edit', $playlist->id) }}">
+                            <i class="fa-solid fa-pen mr-1"></i> Editar
+                        </a>
+                        <form action="{{ route('playlists.delete', $playlist->id) }}" method="POST" onsubmit="return confirm('Tem certeza que deseja excluir esta playlist?')">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="dropdown-item">
+                                <i class="fa-solid fa-trash mr-1"></i> Excluir
+                            </button>
+                        </form>
+                    </div>
+                </div>        
             </td>
         </tr>
     @endforeach

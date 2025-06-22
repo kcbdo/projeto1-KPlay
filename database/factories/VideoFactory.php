@@ -14,23 +14,14 @@ class VideoFactory extends Factory
      */
     public function definition()
     {
-
         $user = User::inRandomOrder()->first();
-
-        // $users = User::all();
-
-        // $user = $users[rand(count($users))];
-
-        // $user = User::where()->first()
-
-        // dd($user->id);
-
         return [
             'title' => $this->faker->title(),
-            'link' => "H8tLS_NOWLs&",
-            'duration'=> $this->faker->time(),
-            'description'=> $this->faker->text(500),
-            'user_id' => $user->id
+            'link' => 'videos/projeto.mp4', 
+            'duration' => $this->faker->time(),
+            'description' => $this->faker->text(250),
+            'user_id' => $user->id,
+            'thumbnail' => null,
         ];
     }
 }
