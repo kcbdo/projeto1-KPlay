@@ -5,7 +5,7 @@
     <div class="alert alert-danger">{{ session('error') }}</div>
 @endif
     
-<h1>Categorias</h1>
+<h1>Categoria</h1>
 
 <div class="card-buttons">
     <a href="/" class="btn btn-secondary btn-sm text-white">Retornar para a página inicial</a>
@@ -28,8 +28,7 @@
         <tr>
             <th scope="col">ID</th>
             <th scope="col">Nome</th>
-            <th scope="col">Editar</th>
-            <th scope="col">Excluir</th>
+            <th scope="col">Ações</th>
         </tr>
     </thead>
     
@@ -39,19 +38,21 @@
                 <td>{{ $category->id }}</td>
                 <td>{{ $category->name }}</td>
                 <td>
-                <a href="{{ route('categories.edit', $category->id) }}" title="Editar" class="btn-edit">
-                    <i class="fa-solid fa-pen"></i>
-                </a>
-                </td>
-                <td>
-                <form action="{{ route('categories.delete', $category->id) }}" method="POST" onsubmit="return confirm('Deseja excluir esta categoria?')">
+                    <div class="dropdown">
+                    <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton{{ $category->id }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Ações
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton{{ $category->id }}">
+                    <a class="dropdown-item" href="{{ route('categories.edit', $category->id) }}">
+                        <i class="fa-solid fa-pen mr-1"></i> Editar
+                    </a>
+                    <form action="{{ route('categories.delete', $category->id) }}" method="POST" onsubmit="return confirm('Deseja excluir esta categoria?')">
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="btn-icon">
-                        <i class="fa-solid fa-trash"></i>
-                    </button>
-                </form>
-                </td>
+                    <button type="submit" class="dropdown-item">
+                        <i class="fa-solid fa-trash mr-1"></i> Excluir
+                    </button>  
+                    </form>
             </tr>
         @endforeach
     </tbody>

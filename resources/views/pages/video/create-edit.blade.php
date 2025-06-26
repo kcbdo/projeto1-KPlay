@@ -4,12 +4,12 @@
 @if ( isset($video) && $video->id)
     <h1>Editar Vídeo</h1>
     
-    <form action="{{ route('video.update') }}" method="POST">
+    <form action="{{ route('video.update') }}" method="POST" enctype="multipart/form-data">
     @method('PUT')
     <input type="hidden" name="id" class="form-control" value="{{ $video->id }}">
 @else
     <h1>Criar Vídeo</h1>
-    <form action="{{ route('video.insert') }}" method="POST">
+    <form action="{{ route('video.insert') }}" method="POST" enctype="multipart/form-data">
 @endif
 
 @if ($errors->any())
@@ -36,9 +36,9 @@
         placeholder="Digite a descrição do vídeo" required>
     </div>
     <div class="form-group">
-        <label for="link">Link</label>
-        <input type="text" name="link" class="form-control" value="{{ old('link', $video->link ?? '')}}"
-        placeholder="Digite o link do vídeo" required>
+        <label for="thumbnail">Thumbnail</label>
+        <input type="file" name="thumbnail" class="form-control" value="{{ old('thumbail', $video->thumbail ?? '')}}"
+         accept="image/*" required>
     </div>
     <div class="form-group">
         <label for="duration">Duração</label>

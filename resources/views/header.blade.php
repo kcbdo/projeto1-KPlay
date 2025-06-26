@@ -16,7 +16,7 @@
         <a class="nav-link" href="{{ route('video.index') }}">Vídeos</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link disabled" href="#">Playlists</a>
+        <a class="nav-link" href="{{ route('playlists.index')}}">Playlists</a>
       </li>
       <li class="nav-item">
         <a class="nav-link disabled" href="#">Comentários</a>

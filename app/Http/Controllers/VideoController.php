@@ -1,28 +1,22 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Http\Requests\StoreVideoRequest;
-use App\Http\Requests\UpdateVideoRequest;
+use App\Models\Playlist;
 use App\Models\Category;
 use App\Models\User;
 use App\Models\Video;
-use  Illuminate\Pagination\PaginationServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Validation\ValidationException;
-use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
+use FFMpeg;
+
+
+
 
 class VideoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function index(Request $request)
     {
         $pesquisar= $request->pesquisar; 
@@ -38,18 +32,14 @@ class VideoController extends Controller
     }
 
 
-    public function create() {
-        
-        $categories = Category::all(); 
-        
-        return view('pages.video.create-edit', [
-            'video' => new Video(), 
-            'categories' => $categories
-        ]);
+    public function create() 
+    {
+        $video = new Video();
+        return $this->form($video);
     }
 
-    public function edit(int $id) {
-        
+    public function edit(int $id) 
+    {
         $video = Video::find($id);
 
         if (!$video)
@@ -57,14 +47,8 @@ class VideoController extends Controller
             return redirect()-> route('video.index')
             ->with ('error', 'Vídeo não encontrado!'); 
         } 
-       
-        
         $categories = Category::all();
-
-        return view('pages.video.create-edit', [
-            'video' => $video,
-            'categories' => $categories
-        ]);
+        return $this->form($video);
     }
 
     /**
@@ -76,14 +60,14 @@ class VideoController extends Controller
     {        
         $validator = $this->validation($request);
         
-        if (!$validator->fails()) {
+        if (!$validator->fails()) 
+        {
             $video = new Video;
             $this->save($video, $request);
-            return redirect()->route('video.index'); 
+            return redirect()->route('video.index')
+                ->with('success', 'Vídeo criado com sucesso!');
         }
-
         $error = $validator->errors()->first();
-        
         return response("Não foi possível criar o vídeo: $error");
     }
 
@@ -97,7 +81,7 @@ class VideoController extends Controller
         $validator = $this->validation($request);
         
         $video = Video::where("id", $request->id)->first();
-        
+    
         if (!$video) 
         {
             return redirect()->back()
@@ -105,35 +89,50 @@ class VideoController extends Controller
             ->with('error', 'Vídeo não encontrado.');
         }
         if (!$validator->fails()){
-            $video = Video::where("id", $request->id)->first();
-            // $video = Video::find($request->id);
             $this->save($video, $request);
             return redirect ()-> route('video.index');
         }
-        
-        
         $error = $validator->errors()->first();
-
         return response ("Não foi possível atualizar o vídeo: $error");
     }
 
+     public function delete (int $id) 
+    {
+        
+        $video = Video::find($id);
+        if ($video)
+        {
+            DB::table('categories_videos')->where('video_id', $id)->delete();
+            $video->delete();
+            return redirect()->route('video.index')->with('success', 'Vídeo deletado com sucesso!');
+        }
+
+    }
     /**
-     * Salva o vídeo
+     * Salva o vídeo || UTILIZAR SYNC PARA CATEGORIAS
      * @param \App\Models\Video $video
      * @param \Illuminate\Http\Request $request
      * @return void
      */
-    private function save(Video $video, Request $request): void {
+    private function save(Video $video, Request $request): void 
+    {
         $video->title = $request->title;
         $video->description = $request->description;
-        $video->link = $request->link;
-        $video->duration = $request->duration;
-        $video->user_id = 1;
-        $video->save();  
-
-        if ($request->categories) {
+        if ($request->hasFile('thumbnail')) {
+            $path = $request->file('thumbnail')->store('videos', 'public');
+            $video->thumbnail = $path;
+        }        
+        $videoPath = storage_path('app/public/' . $video->thumbnail);
+        $thumbnailName = 'thumbnails/video_' . $video->id . '.jpg';
+        $thumbnailPath = storage_path('app/public/' . $thumbnailName);
+        $this->gerarMiniatura($videoPath, $thumbnailPath);
+        $video->thumbnail = $thumbnailName;
+        $video->save(); 
+        if ($request->categories) 
+        {
             DB::table('categories_videos')->where('video_id', $video->id)->delete();
-            foreach ($request->categories as $categoryId) {
+            foreach ($request->categories as $categoryId) 
+            {
                 DB::table('categories_videos')->insert([
                     'video_id' => $video->id,
                     'category_id' => $categoryId,
@@ -142,51 +141,37 @@ class VideoController extends Controller
                 ]);
             }
 
-        } else {
+        } else 
+        {
             DB::table('categories_videos')->where('video_id', $video->id)->delete();
         }
-            
-        // TODO refazer de forma leiga (criar e remover cada registro de categories_videos)
-        //$video->categories()->sync($request->categories);
-        
     }
-    public function delete (int $id) {
-        
-        $video = Video::find($id);
-        if ($video){
-            DB::table('categories_videos')->where('video_id', $id)->delete();
-            $video->delete();
-            return redirect()->route('video.index')->with('success', 'Vídeo deletado com sucesso!');
-        }
+   
 
-    }
-
-    private function form(Video $video) {
+    private function form(Video $video) 
+    {
         $categories = Category::all();
         
-        $data = [
+        $data = 
+        [
             'video' => $video,
             'categories'=> $categories, 
         ];
-
-        
-
         return view ('pages.video.create-edit', $data) ;
     }
 
     private function validation(Request $request) {
 
-        // TODO validar o tipo horário
         $validation = Validator::make($request->all(), [
             'title' => 'required|string|max:100',
-            'link' => 'required|string|max:100',
-            "duration" => "required",
+            'thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            "duration" => 'required|regex:/^([01]?[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$/', // Formato HH:MM:SS
             'description' => 'required|string|max:500',
             "user_id" => "nullable|integer|exists:users,id"
         ], [
             'title.max' => 'O título não pode ter mais que 100 caracteres.',
             'description.max' => 'A descrição não pode ter mais que 500 caracteres.',
-            'link.max' => 'O link não pode ter mais que 255 caracteres.',
+            'thumbnail.max' => 'O tamanho máximo do thumbnail é de 2MB.',
         ]);
 
         return $validation;

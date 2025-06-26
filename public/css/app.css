@@ -139,3 +139,12 @@ td, th {
   padding: 0;
   cursor: pointer;
 }
+.alert-info
+{
+    background-color:  #606060; 
+    color: white; 
+    border-radius:8px;
+    position: relative ;
+    margin-top: 8px;
+    
+}

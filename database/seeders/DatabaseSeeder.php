@@ -18,15 +18,15 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
 
-        // $this->call([
-        //     UserSeeder::class,
-        //     VideoSeeder::class,
-        // ]);
+        $this->call([
+            UserSeeder::class,
+            VideoSeeder::class,
+        ]);
 
         User::factory()->count(100)->create();
-        Video::factory()->count(1000)->create();
         $this->call([
             CategorySeeder::class,
+            PlaylistSeeder::class,
         ]);
 
     }
