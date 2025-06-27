@@ -41,7 +41,7 @@ class Video extends Model
         $query
             ->leftJoin ('categories_videos as cv', 'cv.video_id','=', 'videos.id')
             ->leftJoin ('categories as c', 'c.id', '=', 'cv.category_id')
-            ->select ('videos.*', DB::raw('json_agg(c.name)'))
+            ->select ('videos.*', DB::raw('group_concat(c.name)'))
             ->groupBy('videos.id'); 
 
         if ($pesquisar)

@@ -42,7 +42,13 @@
             <tr>
                 <td>{{ $video->id }}</td>
                 <td>{{ $video->title }}</td>
-                <td> </td>
+                <td>
+                    @if($video->thumbnail)
+                        <img src="{{ asset('storage/' . $video->thumbnail) }}" alt="Thumbnail do vídeo" class="video-thumbnail">
+                    @else
+                        <span>Sem imagem</span>
+                    @endif
+                     </td>
                 <td>{{ $video->duration }}</td>
                 <td>{{ $video->description }}</td>
                 <td>

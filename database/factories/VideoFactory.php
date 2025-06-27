@@ -17,7 +17,6 @@ class VideoFactory extends Factory
         $user = User::inRandomOrder()->first();
         return [
             'title' => $this->faker->title(),
-            'link' => 'videos/video.mp4', 
             'duration' => $this->faker->time(),
             'description' => $this->faker->text(250),
             'user_id' => $user->id,

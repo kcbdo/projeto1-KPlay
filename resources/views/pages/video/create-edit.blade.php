@@ -37,7 +37,7 @@
     </div>
     <div class="form-group">
         <label for="thumbnail">Thumbnail</label>
-        <input type="file" name="thumbnail" class="form-control" value="{{ old('thumbail', $video->thumbail ?? '')}}"
+        <input type="file" name="thumbnail" class="form-control" value="{{ old('thumbmail', $video->thumbail ?? '')}}"
          accept="image/*" required>
     </div>
     <div class="form-group">

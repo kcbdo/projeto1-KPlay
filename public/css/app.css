@@ -148,3 +148,9 @@ td, th {
     margin-top: 8px;
     
 }
+.video-thumbnail{
+    width: 120px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 4px;
+}

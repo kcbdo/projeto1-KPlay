@@ -122,11 +122,6 @@ class VideoController extends Controller
             $path = $request->file('thumbnail')->store('videos', 'public');
             $video->thumbnail = $path;
         }        
-        $videoPath = storage_path('app/public/' . $video->thumbnail);
-        $thumbnailName = 'thumbnails/video_' . $video->id . '.jpg';
-        $thumbnailPath = storage_path('app/public/' . $thumbnailName);
-        $this->gerarMiniatura($videoPath, $thumbnailPath);
-        $video->thumbnail = $thumbnailName;
         $video->save(); 
         if ($request->categories) 
         {
@@ -165,7 +160,7 @@ class VideoController extends Controller
         $validation = Validator::make($request->all(), [
             'title' => 'required|string|max:100',
             'thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            "duration" => 'required|regex:/^([01]?[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$/', // Formato HH:MM:SS
+            "duration" => 'required',
             'description' => 'required|string|max:500',
             "user_id" => "nullable|integer|exists:users,id"
         ], [
