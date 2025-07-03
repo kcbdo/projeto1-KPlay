@@ -29,6 +29,7 @@
         <tr>
             <th scope="col">ID</th>
             <th scope="col">Título</th>
+            <th scope="col">Thumbnail</th>
             <th scope="col">Vídeo</th>
             <th scope="col">Duração</th>
             <th scope="col">Descrição</th>
@@ -44,11 +45,21 @@
                 <td>{{ $video->title }}</td>
                 <td>
                     @if($video->thumbnail)
-                        <img src="{{ asset('storage/' . $video->thumbnail) }}" alt="Thumbnail do vídeo" class="video-thumbnail">
+                        <img src="{{ asset('storage/' . $video->thumbnail) }}" class="video-thumbnail">
                     @else
                         <span>Sem imagem</span>
                     @endif
-                     </td>
+                </td>
+                <td>
+                    @if($video->video)
+                        <video width="120" height="90" controls>
+                            <source src="{{ asset('storage/' . $video->video) }}" type="video/mp4">
+                            Seu navegador não suporta o elemento de vídeo.
+                        </video>
+                    @else
+                        <span>Sem vídeo</span>
+                    @endif
+                </td>
                 <td>{{ $video->duration }}</td>
                 <td>{{ $video->description }}</td>
                 <td>

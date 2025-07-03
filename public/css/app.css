@@ -154,3 +154,15 @@ td, th {
     object-fit: cover;
     border-radius: 4px;
 }
+.thumbail-image{
+    max-width: 120px; 
+    max-height: 90px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+.video-player{
+    max-width: 120px; 
+    max-height: 90px;
+    object-fit: cover;
+    border-radius: 4px;
+}

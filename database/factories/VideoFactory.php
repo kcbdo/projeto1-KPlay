@@ -21,6 +21,8 @@ class VideoFactory extends Factory
             'description' => $this->faker->text(250),
             'user_id' => $user->id,
             'thumbnail' => null,
+            // 'thumbnail' => $this->faker->imageUrl(640, 480, 'video', true, 'Faker'),
+            // 'video' => $this->faker->file('public/videos', 'public/videos', false),
         ];
     }
 }

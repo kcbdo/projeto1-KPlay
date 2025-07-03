@@ -10,9 +10,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
 use FFMpeg;
-
-
-
+use Illuminate\Support\Facades\Storage;
 
 class VideoController extends Controller
 {
@@ -31,7 +29,10 @@ class VideoController extends Controller
         return view('pages.video.video', $data);
     }
 
-
+    /**
+     * Summary of create
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function create() 
     {
         $video = new Video();
@@ -49,6 +50,7 @@ class VideoController extends Controller
         } 
         $categories = Category::all();
         return $this->form($video);
+        
     }
 
     /**
@@ -118,10 +120,39 @@ class VideoController extends Controller
     {
         $video->title = $request->title;
         $video->description = $request->description;
-        if ($request->hasFile('thumbnail')) {
-            $path = $request->file('thumbnail')->store('videos', 'public');
-            $video->thumbnail = $path;
-        }        
+
+            
+        if ($request->hasFile('thumbnail')) 
+        {
+            // Apaga thumbnail antiga, se existir
+            if ($video->thumbnail) {
+                Storage::disk('public')->delete($video->thumbnail);
+            }
+            // Armazena a nova thumbnail
+            $thumbnail = $request->file('thumbnail');
+            // Verifica se o arquivo é uma imagem
+            $thumbnailPath = $thumbnail->store('thumbnails', 'public');
+            // Salva o caminho da thumbnail no modelo Video
+            $video->thumbnail = $thumbnailPath;
+            // Salva o tipo MIME da thumbnail
+            $video->thumbnail_mimetype = $thumbnail->getMimeType();
+        }
+         
+        if ($request->hasFile('video')) 
+        {
+            // Apaga vídeo antigo, se existir
+            if ($video->video) {
+                Storage::disk('public')->delete($video->video);
+            }
+            // Armazena o novo vídeo
+            $videoFile = $request->file('video');
+            // Verifica se o arquivo é um vídeo
+            $videoPath = $videoFile->store('videos', 'public');
+            // Salva o caminho do vídeo no modelo Video
+            $video->video = $videoPath;
+            // Salva o tipo MIME do vídeo
+            $video->video_mimetype = $videoFile->getMimeType();
+        }    
         $video->save(); 
         if ($request->categories) 
         {
@@ -159,7 +190,8 @@ class VideoController extends Controller
 
         $validation = Validator::make($request->all(), [
             'title' => 'required|string|max:100',
-            'thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'thumbnail' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'video' => 'file|mimetypes:video/mp4,video/x-msvideo,video/quicktime|max:51200', // 50MB
             "duration" => 'required',
             'description' => 'required|string|max:500',
             "user_id" => "nullable|integer|exists:users,id"
@@ -167,6 +199,8 @@ class VideoController extends Controller
             'title.max' => 'O título não pode ter mais que 100 caracteres.',
             'description.max' => 'A descrição não pode ter mais que 500 caracteres.',
             'thumbnail.max' => 'O tamanho máximo do thumbnail é de 2MB.',
+            'video.mimetypes' => 'O vídeo deve estar em um formato válido (mp4, avi, mov).',
+            'video.max' => 'O vídeo deve ter no máximo 50MB.',
         ]);
 
         return $validation;

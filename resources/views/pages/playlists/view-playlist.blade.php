@@ -28,10 +28,6 @@
         alert(idade);
         kathleen = (idade < 25) ?  "é a Kathleen" : "Não é a Kathleen";
         alert(kathleen);
-        X = 20;
-        y = 30;
-        resultado = !(X); 
-
     </script>
     
 </body>

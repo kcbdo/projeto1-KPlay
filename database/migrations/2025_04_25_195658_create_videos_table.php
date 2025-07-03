@@ -17,7 +17,10 @@ class CreateVideosTable extends Migration
             
             $table->id(); 
             $table->string('title', 100);
-            $table->string('thumbnail', 100)->nullable(); 
+            $table->string('thumbnail')->nullable(); 
+            $table->string('thumbnail_mimetype')->nullable();
+            $table->string('video')->nullable();
+            $table->string('video_mimetype')->nullable();
             $table->time('duration'); 
             $table->text('description'); 
             $table->unsignedInteger('user_id')->nullable();
