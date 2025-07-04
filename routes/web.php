@@ -5,10 +5,10 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\VideoController;
-use App\Models\CreateEdit;
 use App\Http\Controllers\PlaylistController;
 
-use Illuminate\Support\Facades\Auth;
+
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
@@ -16,7 +16,6 @@ Route::middleware([
 ])->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::get('/video',[VideoController::class,'index'])->name('video.index');
-    // Route::get('/creat-edit',[VideoController::class, 'form'])->name('video.form');
     Route::get('video/create', [VideoController::class, 'create'])->name('video.create');
     Route::get('/video/{id}/edit', [VideoController::class, 'edit'])->name('video.edit');
     
@@ -39,5 +38,15 @@ Route::middleware([
     
     Route::post('/playlists', [PlaylistController::class, 'insert'])->name('playlists.insert'); 
     Route::put('/playlists', [PlaylistController::class, 'update'])->name('playlists.update'); 
-    Route::delete('/playlists/{id}', [PlaylistController::class, 'delete'])->name('playlists.delete');      
+    Route::delete('/playlists/{id}', [PlaylistController::class, 'delete'])->name('playlists.delete');  
+});
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified'
+])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
 });

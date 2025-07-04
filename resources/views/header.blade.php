@@ -1,29 +1,16 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand"  href="/">KPlay</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Alterna navegação">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">X <span class="sr-only">(Página atual)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Usuários</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{{ route('video.index') }}">Vídeos</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{{ route('playlists.index')}}">Playlists</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#">Comentários</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/categories">Categorias</a>
-      </li>
+<nav class="bg-white shadow fixed top-0 left-0 right-0 z-50">
+  <div class="container mx-auto flex items-center justify-between px-4 py-3">
+    <a href="/" class="kplay-logo">KPlay</a>
+    
+    <ul id="menu" class="flex space-x-8 font-medium">
+      <li><a href="#" class="nav-link">Usuários</a></li>
+      <li><a href="{{ route('video.index') }}" class="nav-link">Vídeos</a></li>
+      <li><a href="{{ route('playlists.index')}}" class="nav-link">Playlists</a></li>
+      <li><a href="/categories" class="nav-link">Categorias</a></li>
+      <li><a href="#" class="nav-link">Comentários</a></li>
+      
     </ul>
   </div>
 </nav>
+
+<div class="h-16"></div>

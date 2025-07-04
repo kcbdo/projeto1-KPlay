@@ -40,8 +40,5 @@ Route::middleware([
     
     Route::post('/playlists', [PlaylistController::class, 'insert'])->name('playlists.insert'); 
     Route::put('/playlists', [PlaylistController::class, 'update'])->name('playlists.update'); 
-    Route::delete('/playlists/{id}', [PlaylistController::class, 'delete'])->name('playlists.delete');  
-
-    require base_path('routes/auth.php');
-    
+    Route::delete('/playlists/{id}', [PlaylistController::class, 'delete'])->name('playlists.delete');      
 });

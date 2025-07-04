@@ -8,8 +8,8 @@
 <h1>Playlists</h1>
 
 <div class="card-buttons">
-    <a href="/" class="btn btn-secondary btn-sm text-white">Retornar para a página inicial</a>
-    <a href="{{ route('playlists.create') }}" class="btn btn-secondary btn-sm text-white">Criar playlist</a>
+    <a href="/" class="btn btn-secondary btn-sm">Retornar para a página inicial</a>
+    <a href="{{ route('playlists.create') }}" class="btn btn-secondary btn-sm">Criar playlist</a>
 </div>
 
 <div class="card-body">

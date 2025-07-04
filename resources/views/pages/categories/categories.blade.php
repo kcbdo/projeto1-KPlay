@@ -8,8 +8,8 @@
 <h1>Categoria</h1>
 
 <div class="card-buttons">
-    <a href="/" class="btn btn-secondary btn-sm text-white">Retornar para a página inicial</a>
-    <a href="{{ route('categories.create') }}" class="btn btn-secondary btn-sm text-white">Criar categoria</a>
+    <a href="/" class="btn btn-secondary btn-sm">Retornar para a página inicial</a>
+    <a href="{{ route('categories.create') }}" class="btn btn-secondary btn-sm ">Criar categoria</a>
 </div>
 
 <div class="card-body">
