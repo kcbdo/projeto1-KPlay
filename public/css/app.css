@@ -2562,6 +2562,8 @@ body {
   background-color: #F8F8F8; /* Fundo cinza bem claro para a página */
   font-family: 'Roboto', sans-serif; /* Fonte comum do Google */
   color: #212121; /* Cor padrão do texto no corpo (preto mais suave) */
+  margin: 0; /* Garanta que não há margem no body */
+  padding: 0; /* Garanta que não há padding no body */
 }
 
 h1 {
@@ -2830,4 +2832,62 @@ video {
   background-color: #EEEEEE; /* Fundo cinza claro no hover */
   border-color: #E0E0E0;
 }
+
+/* --- INÍCIO DO CÓDIGO PARA O SEU 'public/css/style.css' --- */
+
+/* Reset básico para evitar margens/paddings indesejados no body */
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh; /* Garante que o corpo ocupa a altura total da viewport */
+  display: block; /* Garante que o body não está agindo como flexbox de centralização */
+  overflow-y: auto; /* Permite rolagem se o conteúdo exceder a tela */
+}
+
+/* ESSA É A REGRA CRÍTICA PARA O ESPAÇAMENTO DO CONTEÚDO */
+/* A altura padrão de headers Tailwind/Bootstrap costuma ser entre 64px e 72px.
+ Vamos usar 80px como um valor seguro. Você DEVE ajustar isso se o seu header
+ for menor ou maior. */
+nav.fixed + div.container.mx-auto {
+  padding-top: 80px !important; /* Valor inicial: 80px. AJUSTE ISSO. */
+  position: relative; /* Garante que respeita o fluxo do documento */
+  z-index: 1; /* Para que o conteúdo fique por baixo do header, mas visível */
+}
+
+/* Garante que o header está fixo, no topo e com z-index alto */
+nav.fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100; /* Garante que ele esteja sempre por cima de tudo */
+  width: 100%;
+  /* Você já tem shadow e bg-white no HTML, então não precisa aqui */
+}
+
+/* Zera a margem superior dos primeiros elementos dentro do contêiner */
+/* Isso é crucial para que o título da página e a barra de pesquisa apareçam */
+.container.mx-auto > h1:first-child,
+.container.mx-auto > .card-buttons:first-child,
+.container.mx-auto > .card-body:first-child,
+.container.mx-auto > .alert:first-child {
+  margin-top: 0 !important; /* Zera a margem superior para evitar que suba */
+}
+
+/* Outros estilos que você já tem no style.css, mantenha-os */
+/* Por exemplo: */
+h1 {
+  color: #212121;
+  margin-bottom: 1.5rem; /* Mantenha essa margem inferior */
+  font-size: 24px;
+  font-weight: 500;
+  /* certifique-se de que não há margin-top aqui */
+}
+
+.search-container {
+  margin-bottom: 1rem;
+  /* certifique-se de que não há margin-top aqui */
+}
+
+/* --- FIM DO CÓDIGO PARA O SEU 'public/css/style.css' --- */
 
