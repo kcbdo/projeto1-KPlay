@@ -25,7 +25,7 @@ class Category extends Model
     {
          if ($pesquisar) 
         {
-            $query->where('name', 'like', "%$pesquisar%");
+            $query->where('name', 'ilike', "%$pesquisar%");
         }
         
         return $query->orderBy('id')->paginate(10);

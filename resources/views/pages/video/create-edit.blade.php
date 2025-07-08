@@ -44,7 +44,7 @@
         @if(isset($video) && $video->id && $video->thumbnail)
             <div class="mb-2">
                 <label>Thumbnail atual:</label><br>
-                <img src="{{ asset('storage/' . $video->thumbnail) }}" alt="Thumbnail atual" class="thumbail-image">
+                <img src="{{ asset('storage/' . $video->thumbnail) }}" alt="Thumbnail atual" class="video-thumbnail">
             </div>
         @endif
         <input type="file" name="thumbnail" class="form-control" accept="image/*" {{ isset($video) && $video->id ? '' : 'required' }}>

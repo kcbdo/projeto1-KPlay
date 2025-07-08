@@ -2478,28 +2478,6 @@ select {
       border-radius: 4px;
       font-size: 13px;
     }
-    /* Estilo para o KPlay - Botão de play amarelo mais escuro e texto cinza */
-.kplay-logo {
-  display: flex; /* Para alinhar o ícone e o texto */
-  align-items: center; /* Centralizar verticalmente */
-  font-weight: bold;
-  font-size: 2rem; /* Tamanho da fonte KPlay */
-  color: #606060; /* Cor do texto KPlay (cinza) */
-  text-decoration: none; /* Remover sublinhado do link */
-}
-
-/* Criando o "botão de play" amarelo mais escuro (um triângulo) */
-.kplay-logo::before {
-  content: ''; /* Conteúdo vazio para criar o elemento */
-  display: inline-block;
-  width: 0;
-  height: 0;
-  border-left: 30px solid #FFC107; /* Lado esquerdo do triângulo (amarelo mais escuro - Amber) */
-  border-top: 15px solid transparent; /* Parte superior transparente */
-  border-bottom: 15px solid transparent; /* Parte inferior transparente */
-  margin-right: 8px; /* Espaçamento entre o triângulo e o texto */
-  vertical-align: middle; /* Alinhar verticalmente */
-}
 
 /* Estilo para os links de navegação */
 .nav-link {
@@ -2524,9 +2502,12 @@ select {
   display: flex;
   align-items: center;
   font-weight: bold;
-  font-size: 2rem;
-  color: #212121; /* Cor do texto KPlay (preto mais suave) */
+  font-size: 30px;
+  color: #e5e5e5; /* Cinza claro para o texto KPlay */
   text-decoration: none;
+  background-color: #cfb14f; /* Amarelo claro */
+  border-radius: 6px;
+  padding: 5px 12px;
 }
 
 .kplay-logo::before {
@@ -2534,11 +2515,17 @@ select {
   display: inline-block;
   width: 0;
   height: 0;
-  border-left: 30px solid #FFC107; /* Amarelo mais escuro - Amber */
-  border-top: 15px solid transparent;
-  border-bottom: 15px solid transparent;
-  margin-right: 8px;
+  border-left: 24px solid #bb9627; /* Amarelo mais escuro para o ícone play */
+  border-top: 14px solid transparent;
+  border-bottom: 14px solid transparent;
+  margin-right: 10px;
   vertical-align: middle;
+}
+
+.kplay-logo:hover {
+  color: #cccccc; /* Cinza claro ao passar o mouse */
+  text-decoration: none;
+  background-color: #bfa342; /* Um pouco mais escuro ao hover */
 }
 
 .nav-link {
@@ -2549,6 +2536,7 @@ select {
 
 .nav-link:hover {
   color: #212121; /* Preto para links do header ao passar o mouse */
+  text-decoration: none;
 }
 
 .nav-item-disabled {
@@ -2700,7 +2688,7 @@ h1 {
   height: 70px;
   -o-object-fit: cover;
      object-fit: cover;
-  border-radius: 2px;
+  border-radius: 8px;
 }
 
 /* Estilo para o vídeo player */
@@ -2888,6 +2876,72 @@ h1 {
   margin-bottom: 1rem;
   /* certifique-se de que não há margin-top aqui */
 }
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5; /* cinza claro */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
 
-/* --- FIM DO CÓDIGO PARA O SEU 'public/css/style.css' --- */
+.login-container {
+  background-color: white;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+}
+
+.login-title {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #FFD600; /* amarelo */
+  text-align: center;
+}
+
+.login-form input[type="email"],
+.login-form input[type="password"] {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+.login-form button {
+  width: 100%;
+  padding: 12px;
+  background-color: #FFD600; /* amarelo */
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #333; /* cinza escuro */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.login-form button:hover {
+  background-color: #e6c700;
+}
+
+.footer-text {
+  text-align: center;
+  font-size: 14px;
+  margin-top: 20px;
+  color: #666;
+}
+
+@media (max-width: 480px) {
+  .login-container {
+    padding: 30px 20px;
+  }
+}
+
+
 

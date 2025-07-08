@@ -4,7 +4,6 @@
     <x-jet-authentication-card>
         <x-slot name="logo">
             <a href="/">
-                <img src="{{ asset('logo.png') }}" alt="Logo" class="w-32 mx-auto">
             </a>
         </x-slot>
         <x-jet-validation-errors class="mb-4" />
