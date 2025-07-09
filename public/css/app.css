@@ -2877,70 +2877,45 @@ h1 {
   /* certifique-se de que não há margin-top aqui */
 }
 body {
-  margin: 0;
-  font-family: Arial, sans-serif;
   background-color: #f5f5f5; /* cinza claro */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
 }
 
-.login-container {
-  background-color: white;
-  padding: 40px;
-  border-radius: 12px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 400px;
+.card-login {
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
-.login-title {
-  font-size: 28px;
+.btn-yellow {
+  background-color: #FFD600;
+  color: #333;
   font-weight: bold;
-  margin-bottom: 20px;
-  color: #FFD600; /* amarelo */
-  text-align: center;
 }
 
-.login-form input[type="email"],
-.login-form input[type="password"] {
-  width: 100%;
-  padding: 12px;
-  margin: 10px 0;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 16px;
+.btn-yellow:hover {
+  background-color: #e6c200;
+  color: #333;
 }
 
-.login-form button {
-  width: 100%;
-  padding: 12px;
-  background-color: #FFD600; /* amarelo */
+.link-yellow {
+  color: #FFD600;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.link-yellow:hover {
+  text-decoration: none;
+  color: #d3b402; 
+}
+.btn-login{
+  background-color: #FF0000; /* vermelho YouTube */
+  color: white;
   border: none;
-  border-radius: 6px;
-  font-size: 16px;
-  font-weight: bold;
-  color: #333; /* cinza escuro */
+  padding: 10px 14px;
+  font-weight: 600;
+  font-size: 14px;
+  border-radius: 2px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-}
-
-.login-form button:hover {
-  background-color: #e6c700;
-}
-
-.footer-text {
-  text-align: center;
-  font-size: 14px;
-  margin-top: 20px;
-  color: #666;
-}
-
-@media (max-width: 480px) {
-  .login-container {
-    padding: 30px 20px;
-  }
 }
 
 

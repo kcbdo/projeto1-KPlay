@@ -6,14 +6,13 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\VideoController;
 use App\Http\Controllers\PlaylistController;
-
-
+use App\Http\Controllers\UserController;
 
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
-])->group(function () {
+])->prefix("")->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::get('/video',[VideoController::class,'index'])->name('video.index');
     Route::get('video/create', [VideoController::class, 'create'])->name('video.create');
@@ -39,6 +38,10 @@ Route::middleware([
     Route::post('/playlists', [PlaylistController::class, 'insert'])->name('playlists.insert'); 
     Route::put('/playlists', [PlaylistController::class, 'update'])->name('playlists.update'); 
     Route::delete('/playlists/{id}', [PlaylistController::class, 'delete'])->name('playlists.delete');  
+
+    Route::get('/users', [UserController::class, 'index'])->name('users.index');
+
+
 });
 
 Route::middleware([

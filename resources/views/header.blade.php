@@ -3,10 +3,10 @@
     <a href="/" class="kplay-logo">KPlay</a>
 
     <ul id="menu" class="flex space-x-8 font-medium">
-      <li><a href="#" class="nav-link">Usuários</a></li>
+      <li><a href="{{ route( 'users.index')}}" class="nav-link">Usuários</a></li>
       <li><a href="{{ route('video.index') }}" class="nav-link">Vídeos</a></li>
       <li><a href="{{ route('playlists.index')}}" class="nav-link">Playlists</a></li>
-      <li><a href="/categories" class="nav-link">Categorias</a></li>
+      <li><a href="{{ route ('categories.index')}}" class="nav-link">Categorias</a></li>
       <li><a href="#" class="nav-link">Comentários</a></li>
     </ul>
   </div> 

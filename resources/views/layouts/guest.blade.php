@@ -16,5 +16,21 @@
         <div class="font-sans text-gray-900 antialiased">
             {{ $slot }}
         </div>
+        <div class="card">
+            <h2>Entrar no KPlay</h2>
+            <form method="POST" action="/login">
+              @csrf
+              <div class="form-group">
+                <input type="email" name="email" placeholder="E-mail" required>
+              </div>
+              <div class="form-group">
+                <input type="password" name="password" placeholder="Senha" required>
+              </div>
+              <button type="submit" class="btn-login">Entrar</button>
+            </form>
+            <div class="footer-text">
+              Não tem uma conta? <a href="/register">Cadastre-se</a>
+            </div>
+          </div>
     </body>
 </html>
