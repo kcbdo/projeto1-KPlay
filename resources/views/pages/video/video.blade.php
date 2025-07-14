@@ -15,7 +15,7 @@
 </div>
 
 <div class=card-body>
-    <table class="table mt-3">
+    <table class="table mt-2">
         <form action="{{route('video.index')}}" method="GET">
             <div class="row">
                 <div class="search-container">

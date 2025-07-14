@@ -29,12 +29,13 @@
             <input type="text" name="name" class="form-control" value="{{ old('name', $category->name ?? '') }}" placeholder="Digite o nome da categoria" required>
         </div>
     </div>
-
-    <button type="submit" class="btn btn-kat btn-sm">
+    <div class = card-buttons>
+    <button type="submit" class="btn btn-secondary btn-sm">
         {{ isset($category) && $category->id ? 'Atualizar' : 'Criar' }}
     </button>
 
-    <a href="{{ route('categories.index') }}" class="btn btn-kat btn-sm">Voltar</a>
+    <a href="{{ route('categories.index') }}" class="btn btn-secondary btn-sm">Voltar</a>
+    </div>
 </form>
 
 @endsection

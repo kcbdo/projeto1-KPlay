@@ -12,7 +12,7 @@ Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
-])->prefix("")->group(function () {
+])->prefix("painel")->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::get('/video',[VideoController::class,'index'])->name('video.index');
     Route::get('video/create', [VideoController::class, 'create'])->name('video.create');
