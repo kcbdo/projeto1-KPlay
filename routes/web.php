@@ -8,11 +8,8 @@ use App\Http\Controllers\VideoController;
 use App\Http\Controllers\PlaylistController;
 use App\Http\Controllers\UserController;
 
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified',
-])->prefix("painel")->group(function () {
+Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])
+->prefix("painel")->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::get('/video',[VideoController::class,'index'])->name('video.index');
     Route::get('video/create', [VideoController::class, 'create'])->name('video.create');
@@ -42,6 +39,14 @@ Route::middleware([
     Route::get('/users', [UserController::class, 'index'])->name('users.index');
 
 
+});
+Route::prefix("")->group(function () {
+    Route::get('/', [HomeController::class, 'index'])->name('site.home');
+    Route::get('/login', [LoginController::class, 'index'])->name('site.login');
+    Route::post('/login', [LoginController::class, 'authenticate'])->name('site.login.authenticate');
+    Route::get('/logout', [LoginController::class, 'logout'])->name('site.logout');
+    Route::get('/video/{id}', [VideoController::class, 'show'])->name('site.video.show');
+    Route::get('/playlist/{id}', [PlaylistController::class, 'show'])->name('site.playlist.show');
 });
 
 Route::middleware([
