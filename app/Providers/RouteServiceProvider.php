@@ -11,48 +11,43 @@ use Illuminate\Support\Facades\Route;
 class RouteServiceProvider extends ServiceProvider
 {
     /**
-     * The path to the "home" route for your application.
+     * A rota "home" da aplicação (redirecionamento após login).
      *
-     * This is used by Laravel authentication to redirect users after login.
-     *
-     * @var string
+     * Alterado para a raiz pública "/"
      */
-    public const HOME = '/dashboard';
+    public const HOME = '/';
 
     /**
-     * The controller namespace for the application.
-     *
-     * When present, controller route declarations will automatically be prefixed with this namespace.
-     *
-     * @var string|null
+     * O namespace dos controllers, desativado para usar FQCN nas rotas.
      */
     // protected $namespace = 'App\\Http\\Controllers';
 
     /**
-     * Define your route model bindings, pattern filters, etc.
-     *
-     * @return void
+     * Definição das rotas da aplicação.
      */
     public function boot()
     {
         $this->configureRateLimiting();
 
         $this->routes(function () {
+            // Rotas API
             Route::prefix('api')
                 ->middleware('api')
-                ->namespace($this->namespace)
                 ->group(base_path('routes/api.php'));
 
+            // Rotas Web públicas
             Route::middleware('web')
-                ->namespace($this->namespace)
                 ->group(base_path('routes/web.php'));
+
+            // Rotas Admin (painel) com middleware auth e prefixo 'painel'
+            Route::middleware(['web', 'auth:sanctum', config('jetstream.auth_session'), 'verified'])
+                ->prefix('painel')
+                ->group(base_path('routes/admin.php'));
         });
     }
 
     /**
-     * Configure the rate limiters for the application.
-     *
-     * @return void
+     * Configuração do rate limiter da API.
      */
     protected function configureRateLimiting()
     {

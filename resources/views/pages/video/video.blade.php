@@ -10,8 +10,8 @@
 
 <h1>Vídeos</h1>
 <div class="card-buttons">
-    <a href="/" class="btn btn-secondary btn-sm">Retornar para a página inicial</a>
-    <a href="{{ route('video.create') }}" class="btn btn-secondary btn-sm ">Criar vídeo</a>
+    <a type="button" href="/" class="btn btn-primary btn-sm">Retornar para a página inicial</a>
+    <a type="button" href="{{ route('video.create') }}" class=" btn btn-primary btn-sm ">Criar vídeo</a>
 </div>
 
 <div class=card-body>
