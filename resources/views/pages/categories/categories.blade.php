@@ -4,25 +4,24 @@
 @if(session('error'))
     <div class="alert alert-danger">{{ session('error') }}</div>
 @endif
-    
-<h1>Categoria</h1>
-<div class="card-buttons">
-    <a href="/" class="btn btn-secondary btn-sm">Retornar para a página inicial</a>
-    <a href="{{ route('categories.create') }}" class="btn btn-secondary btn-sm ">Criar categoria</a>
-</div>
 
 <div class="card-body">
-    <form action="{{ route('categories.index') }}" method="GET">
-        <div class="row">
-            <div class="search-container">
-                <input type="text" name="pesquisar" class="form-control" placeholder="Busque por nome">
-                <button type="submit" class="btn btn-secondary btn-sm">Pesquisar</button>
-            </div>
-        </div>
-    </form>
-</div>
-
 <table class="table mt-2">
+    <h1>Categoria</h1>
+    <div class="card-buttons">
+        <a href="/" class="btn btn-secondary btn-sm">Retornar para a página inicial</a>
+        <a href="{{ route('categories.create') }}" class="btn btn-secondary btn-sm ">Criar categoria</a>
+    </div>
+
+        <form action="{{ route('categories.index') }}" method="GET">
+            <div class="row">
+                <div class="search-container">
+                    <input type="text" name="pesquisar" class="form-control" placeholder="Busque por nome">
+                    <button type="submit" class="btn btn-secondary btn-sm">Pesquisar</button>
+                </div>
+            </div>
+        </form>
+    </div>
     <thead class="thead-dark">
         <tr>
             <th scope="col">ID</th>

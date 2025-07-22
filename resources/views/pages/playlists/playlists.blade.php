@@ -5,14 +5,18 @@
     <div class="alert alert-danger">{{ session('error') }}</div>
 @endif
 
+
+ 
+<div class="card-body">
+
+<table class="table mt-3">
+
 <h1>Playlists</h1>
 
-<div class="card-buttons">
-    <a href="/" class="btn btn-secondary btn-sm">Retornar para a página inicial</a>
-    <a href="{{ route('playlists.create') }}" class="btn btn-secondary btn-sm">Criar playlist</a>
-</div>
-
-<div class="card-body">
+    <div class="card-buttons">
+        <a href="/" class="btn btn-secondary btn-sm">Retornar para a página inicial</a>
+        <a href="{{ route('playlists.create') }}" class="btn btn-secondary btn-sm">Criar playlist</a>
+    </div>
     <form action="{{ route('playlists.index') }}" method="GET">
         <div class="row">
             <div class="search-container">
@@ -22,8 +26,6 @@
         </div>
     </form>
 </div>
-
-<table class="table mt-3">
     <thead class="thead-dark">
     <tr>
         <th scope="col">ID</th>

@@ -9,10 +9,11 @@
       <li><a href="#" class="nav-link">Comentários</a></li>
         
       <div class="dropdown">
-          <button class="btn btn-light" type="button" id="userMenu" data-bs-toggle="dropdown" aria-expanded="false">
-              <i class="fa-solid fa-user-circle fa-lg me-3"></i>
-              <span>{{ Auth::user()->name }}</span>
-          </button>
+           <li class="nav-item dropdown relative">
+              <a class="nav-link dropdown-toggle cursor-pointer" data-bs-toggle="dropdown" href="#">
+                <i class="fa-solid fa-user-circle fa-lg me-3"></i>
+                  {{ Auth::user()->name }}
+              </a>
 
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenu">
               <li class="px-3 py-2">

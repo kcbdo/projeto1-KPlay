@@ -8,14 +8,15 @@
     <div class="alert alert-success">{{ session('success') }}</div> 
 @endif
 
-<h1>Vídeos</h1>
-<div class="card-buttons">
-    <a type="button" href="/" class="btn btn-primary btn-sm">Retornar para a página inicial</a>
-    <a type="button" href="{{ route('video.create') }}" class=" btn btn-primary btn-sm ">Criar vídeo</a>
-</div>
+
 
 <div class=card-body>
     <table class="table mt-2">
+        <h1>Vídeos</h1>
+        <div class="card-buttons">
+            <a type="button" href="/" class="btn btn-primary btn-sm">Retornar para a página inicial</a>
+            <a type="button" href="{{ route('video.create') }}" class=" btn btn-primary btn-sm ">Criar vídeo</a>
+        </div>
         <form action="{{route('video.index')}}" method="GET">
             <div class="row">
                 <div class="search-container">
@@ -52,7 +53,7 @@
                 </td>
                 <td>
                     @if($video->video)
-                        <video width="120" height="90" controls>
+                        <video controls>
                             <source src="{{ asset('storage/' . $video->video) }}" type="video/mp4">
                             Seu navegador não suporta o elemento de vídeo.
                         </video>

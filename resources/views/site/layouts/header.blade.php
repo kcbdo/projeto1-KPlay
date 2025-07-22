@@ -17,12 +17,12 @@
     <ul class="navbar-nav ms-auto flex items-center space-x-4">
       @guest
           <li><a class="nav-link" href="{{ route('login') }}">Entrar</a></li>
-
       @endguest
 
       @auth
           <li class="nav-item dropdown relative">
               <a class="nav-link dropdown-toggle cursor-pointer" data-bs-toggle="dropdown" href="#">
+                <i class="fa-solid fa-user-circle fa-lg me-3"></i>
                   {{ Auth::user()->name }}
               </a>
               <ul class="dropdown-menu dropdown-menu-end absolute right-0 mt-2 bg-white border rounded shadow-md min-w-[200px]">

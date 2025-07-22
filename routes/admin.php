@@ -9,7 +9,7 @@ use App\Http\Controllers\PlaylistController;
 use App\Http\Controllers\UserController;
 
 Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])
-->prefix("painel")->group(function () {
+->prefix("")->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::get('/video',[VideoController::class,'index'])->name('video.index');
     Route::get('video/create', [VideoController::class, 'create'])->name('video.create');

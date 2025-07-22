@@ -24,6 +24,7 @@ class CreateVideosTable extends Migration
             $table->time('duration'); 
             $table->text('description'); 
             $table->unsignedInteger('user_id')->nullable();
+            $table->boolean('is_public')->default(true);
             $table->timestamps();   
             $table->foreign("user_id")->references("id")->on("users")->onDelete("cascade");
             
