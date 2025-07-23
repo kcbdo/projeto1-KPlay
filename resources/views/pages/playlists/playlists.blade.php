@@ -75,7 +75,6 @@
 <div class="card-footer">
     {{ $playlists->appends(request()->input())->links('pagination::bootstrap-4') }}
 </div>
-
 @endsection
 
 

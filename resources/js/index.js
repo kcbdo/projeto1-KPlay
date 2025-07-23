@@ -1,4 +1,4 @@
-const botaoPlay = document.getElementById('play');
+const botaoPlay = document.getElementById('play')
 botaoPlay.addEventListener('click', () => {
-    console.log("O botão Play foi clicado!");
-});
+  console.log('O botão Play foi clicado!')
+})

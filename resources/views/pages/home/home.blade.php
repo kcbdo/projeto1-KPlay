@@ -1,4 +1,4 @@
 @extends('template')
-@section ('page-container')
-
+@section('page-container')
+  
 @endsection

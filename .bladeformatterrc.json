@@ -1,0 +1,5 @@
+{
+  "wrapAttributes": "force",
+  "wrapLineLength": 100,
+  "noMultipleEmptyLines": true
+}
