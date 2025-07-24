@@ -28,7 +28,6 @@
       alert(idade)
       kathleen = idade < 25 ? 'é a Kathleen' : 'Não é a Kathleen'
       alert(kathleen)
-      aler(xoxoxo)
     </script>
   </body>
 </html>

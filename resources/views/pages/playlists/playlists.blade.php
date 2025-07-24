@@ -14,14 +14,14 @@
 <h1>Playlists</h1>
 
     <div class="card-buttons">
-        <a href="/" class="btn btn-secondary btn-sm">Retornar para a página inicial</a>
-        <a href="{{ route('playlists.create') }}" class="btn btn-secondary btn-sm">Criar playlist</a>
+        <a href="/painel" class="btn btn-primary btn-sm">Retornar para a página inicial</a>
+        <a href="{{ route('playlists.create') }}" class="btn btn-primary btn-sm">Criar playlist</a>
     </div>
     <form action="{{ route('playlists.index') }}" method="GET">
         <div class="row">
             <div class="search-container">
                 <input type="text" name="pesquisar" class="form-control" placeholder="Busque por título" value="{{ request('pesquisar') }}">
-                <button type="submit" class="btn btn-secondary btn-sm btn">Pesquisar</button>
+                <button type="submit" class="btn btn-primary btn-sm btn">Pesquisar</button>
             </div>
         </div>
     </form>
@@ -36,20 +36,20 @@
     </tr>
 </thead>
 
-<tbody>
+<tbody class = "kit-kat">
     @foreach ($playlists as $playlist)
         <tr>
             <td>{{ $playlist->id }}</td>
             <td>{{ $playlist->title }}</td>
             <td>{{ $playlist->is_public ? 'Sim' : 'Não' }}</td>
              <td>
-                <a href="{{ route('playlists.show', $playlist->id) }}" class="btn btn-secondary btn-sm">
+                <a href="{{ route('playlists.show', $playlist->id) }}" class="btn btn-primary btn-sm">
                     <i class="fa-solid fa-eye mr-1"></i> Visualizar
                 </a>
             </td>
             <td>
                 <div class="dropdown">
-                    <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton{{ $playlist->id }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton{{ $playlist->id }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Ações
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton{{ $playlist->id }}">

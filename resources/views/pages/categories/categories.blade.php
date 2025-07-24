@@ -9,15 +9,15 @@
 <table class="table mt-2">
     <h1>Categoria</h1>
     <div class="card-buttons">
-        <a href="/" class="btn btn-secondary btn-sm">Retornar para a página inicial</a>
-        <a href="{{ route('categories.create') }}" class="btn btn-secondary btn-sm ">Criar categoria</a>
+        <a href="/painel" class="btn btn-primary btn-sm">Retornar para a página inicial</a>
+        <a href="{{ route('categories.create') }}" class="btn btn-primary btn-sm ">Criar categoria</a>
     </div>
 
         <form action="{{ route('categories.index') }}" method="GET">
             <div class="row">
                 <div class="search-container">
                     <input type="text" name="pesquisar" class="form-control" placeholder="Busque por nome">
-                    <button type="submit" class="btn btn-secondary btn-sm">Pesquisar</button>
+                    <button type="submit" class="btn btn-primary btn-sm">Pesquisar</button>
                 </div>
             </div>
         </form>
@@ -37,7 +37,7 @@
                 <td>{{ $category->name }}</td>
                 <td>
                     <div class="dropdown">
-                    <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton{{ $category->id }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton{{ $category->id }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Ações
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton{{ $category->id }}">

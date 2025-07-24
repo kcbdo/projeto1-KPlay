@@ -12,7 +12,9 @@
     <table class="table mt-2">
       <h1>Vídeos</h1>
       <div class="card-buttons">
-        <a type="button" href="/" class="btn btn-primary btn-sm">Retornar para a página inicial</a>
+        <a type="button" href="/painel" class="btn btn-primary btn-sm">
+          Retornar para a página inicial
+        </a>
         <a type="button" href="{{ route('video.create') }}" class="btn btn-primary btn-sm">
           Criar vídeo
         </a>
@@ -26,7 +28,7 @@
               class="form-control"
               placeholder="Busque por título"
             />
-            <button type="submit" class="btn btn-secondary btn-sm btn">Pesquisar</button>
+            <button type="submit" class="btn btn-primary btn-sm">Pesquisar</button>
           </div>
         </div>
       </form>
@@ -76,7 +78,7 @@
             <td>
               <div class="dropdown">
                 <button
-                  class="btn btn-secondary btn-sm dropdown-toggle"
+                  class="btn btn-primary btn-sm dropdown-toggle"
                   type="button"
                   id="dropdownMenuButton{{ $video->id }}"
                   data-toggle="dropdown"

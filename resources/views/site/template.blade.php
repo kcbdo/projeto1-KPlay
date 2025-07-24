@@ -6,7 +6,7 @@
     <meta name="description" content="Esse é o meu primeiro software para assistir vídeos!" />
     <meta name="keywords" content="vídeos,playlists,músicas" />
     <meta name="author" content="Kathleen Barbosa" />
-    <title>Kplay</title>
+    <title>Kplaysy</title>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet" />
     @include('site.layouts.head')
   </head>
