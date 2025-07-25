@@ -150,6 +150,8 @@ h1 {
   margin-bottom: 1rem;
   color: #212121;
   border-collapse: collapse;
+  padding: 10px 20px 0;
+  height: 100%;
 }
 
 .thead-dark {
@@ -360,6 +362,7 @@ body {
 .card-login {
   border-radius: 16px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  margin-bottom: 250px;
 }
 
 .btn-yellow {
@@ -521,4 +524,5 @@ nav {
   border-radius: 10px;
   padding: 460px;
   padding-top: 8px;
+  padding-bottom: 0px;
 }

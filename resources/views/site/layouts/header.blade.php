@@ -1,5 +1,22 @@
 <nav class="bg-white shadow fixed top-0 left-0 right-0 z-50">
   <div class="container mx-auto flex items-center justify-between px-4 py-2">
+    <div class="dropdown">
+      <button
+        class="btn btn-light dropdown-toggle"
+        type="button"
+        id="dropdownMenuButton"
+        data-bs-toggle="dropdown"
+      >
+        <i class="fa-solid fa-bars fa-lg"></i>
+      </button>
+
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <li><a class="dropdown-item" href="/shorts">Shorts</a></li>
+        <li><a class="dropdown-item" href="/shorts-gostei">Shorts que gostei</a></li>
+        <li><a class="dropdown-item" href="/shorts-nao-gostei">Shorts que não gostei</a></li>
+        <li><a class="dropdown-item" href="/shorts-salvos">Shorts salvos</a></li>
+      </ul>
+    </div>
     <a href="/" class="kplay-logo">KPlaysy</a>
 
     <form action="#" method="GET" class="search-form">

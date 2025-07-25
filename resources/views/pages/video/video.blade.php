@@ -112,8 +112,6 @@
       </tbody>
     </table>
 
-    <div class="card-footer">
-      {{ $videos->appends(request()->input())->links('pagination::bootstrap-4') }}
-    </div>
+    <div class="card-footer"></div>
   </div>
 @endsection
