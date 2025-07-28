@@ -32,6 +32,7 @@
   color: #606060;
   text-decoration: none;
   transition: color 0.3s ease;
+  margin-left: 150px;
 }
 
 .nav-link:hover {
@@ -246,7 +247,7 @@ video {
 }
 
 .dropdown-item:hover {
-  background-color: #f5f5f5;
+  background-color: transparent;
   color: #212121;
 }
 
@@ -510,7 +511,7 @@ nav {
 .video-player-home {
   width: 428px;
   height: 760px;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
 }
 
 .video-player-home video {
@@ -525,4 +526,35 @@ nav {
   padding: 460px;
   padding-top: 8px;
   padding-bottom: 0px;
+}
+.nav-spacing {
+  gap: 30px;
+}
+.responsividade-menu {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+.fa-solid {
+  margin-right: 20px;
+}
+.video-actions {
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+  margin-top: 8px;
+}
+.video-side-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  margin-left: 450px;
+  margin-top: -150px;
+}
+.fa-thumbs-up {
+  color: #8ab4f8;
+  font-size: 24px;
+  cursor: pointer;
 }
