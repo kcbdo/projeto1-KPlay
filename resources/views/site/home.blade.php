@@ -16,32 +16,34 @@
         @else
             <div class="video-list">
                 @foreach($videos as $video)
+                    
                     <div class="video-item">
-                        <div class="video-item">
-                            <div class="video-wrapper">
-                                <div class="video-player video-player-home">
-                                    @if($video->video)
-                                        <video controls>
-                                            <source src="{{ asset('storage/' . $video->video) }}" type="video/mp4">
-                                        </video>
-                                    @else
-                                        <span>Sem vídeo</span>
-                                    @endif
-                                </div>
-                                <div class="video-side-buttons">
-                                    <form method="POST" action="{{ route('video.index', $video->id) }}">
-                                        @csrf
-                                        <button type="submit" class="btn-side">
-                                            <i class="fas fa-thumbs-up"></i><br>Gostei
-                                        </button>
-                                    </form>
-                        
-                                    <a href="{{ route('video.index', $video->id) }}" class="btn-side">
-                                        <i class="fas fa-comment"></i><br>Comentar
-                                    </a>
-                                </div>
+                        <div class="video-wrapper">
+                            <div class="video-player">
+                                @if($video->video)
+                                    <video controls>
+                                        <source src="{{ asset('storage/' . $video->video) }}" type="video/mp4">
+                                    </video>
+                                @else
+                                    <span>Sem vídeo</span>
+                                @endif
+                            </div>
+                            <div class="video-side-buttons">
+                                <form method="POST" action="{{ route('videos.like', $video->id) }}">
+                                    @csrf
+                                    <button type="submit" class="btn-side">
+                                        <i class="fa-regular fa-heart"></i>
+                                    </button>
+                                    <button type="button" class="btn-side" onclick="window.location='{{ route('video.index', $video->id) }}'">
+                                        <i class="fa-sharp fa-regular fa-comment"></i>
+                                    </button>                                        
+                                    <button type="submit" class="btn-side">
+                                        <i class="fa-regular fa-paper-plane"></i>
+                                    </button>
+                                </form>
                             </div>
                         </div>
+                    </div>
                         
                 @endforeach
                 

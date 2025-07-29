@@ -8,8 +8,8 @@ use App\Http\Controllers\PlaylistController;
 Route::get('/', [HomeController::class, 'index'])->name('site.home');
 Route::get('/videos', [VideoController::class, 'index'])->name('site.videos');
 
-Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])
-->prefix("")->group(function () {
+Route::post('/videos/{id}/like', [VideoController::class, 'like'])->name('videos.like');
 
 
-});
+Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',])
+    ->prefix("")->group(function () {});

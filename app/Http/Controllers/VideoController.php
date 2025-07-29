@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Playlist;
 use App\Models\Category;
 use App\Models\User;
@@ -14,18 +15,18 @@ use Illuminate\Support\Facades\Storage;
 
 class VideoController extends Controller
 {
-    
+
     public function index(Request $request)
     {
-        $pesquisar= $request->pesquisar; 
+        $pesquisar = $request->pesquisar;
 
-        $videos= Video::getVideos($pesquisar); 
-        
+        $videos = Video::getVideos($pesquisar);
+
         $data = [
             'videos' => $videos,
             'pesquisar' => $pesquisar,
         ];
-        
+
         return view('pages.video.video', $data);
     }
 
@@ -33,24 +34,22 @@ class VideoController extends Controller
      * Summary of create
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function create() 
+    public function create()
     {
         $video = new Video();
         return $this->form($video);
     }
 
-    public function edit(int $id) 
+    public function edit(int $id)
     {
         $video = Video::find($id);
 
-        if (!$video)
-        {
-            return redirect()-> route('video.index')
-            ->with ('error', 'Vídeo não encontrado!'); 
-        } 
+        if (!$video) {
+            return redirect()->route('video.index')
+                ->with('error', 'Vídeo não encontrado!');
+        }
         $categories = Category::all();
         return $this->form($video);
-        
     }
 
     /**
@@ -59,11 +58,10 @@ class VideoController extends Controller
      * @return mixed|\Illuminate\Http\RedirectResponse
      */
     public function insert(Request $request)
-    {        
+    {
         $validator = $this->validation($request);
-        
-        if (!$validator->fails()) 
-        {
+
+        if (!$validator->fails()) {
             $video = new Video;
             $this->save($video, $request);
             return redirect()->route('video.index')
@@ -81,34 +79,42 @@ class VideoController extends Controller
     public function update(Request $request)
     {
         $validator = $this->validation($request);
-        
+
         $video = Video::where("id", $request->id)->first();
-    
-        if (!$video) 
-        {
+
+        if (!$video) {
             return redirect()->back()
-            ->withInput()
-            ->with('error', 'Vídeo não encontrado.');
+                ->withInput()
+                ->with('error', 'Vídeo não encontrado.');
         }
-        if (!$validator->fails()){
+        if (!$validator->fails()) {
             $this->save($video, $request);
-            return redirect ()-> route('video.index');
+            return redirect()->route('video.index');
         }
         $error = $validator->errors()->first();
-        return response ("Não foi possível atualizar o vídeo: $error");
+        return response("Não foi possível atualizar o vídeo: $error");
     }
 
-     public function delete (int $id) 
+    public function delete(int $id)
     {
-        
+
         $video = Video::find($id);
-        if ($video)
-        {
+        if ($video) {
             DB::table('categories_videos')->where('video_id', $id)->delete();
             $video->delete();
             return redirect()->route('video.index')->with('success', 'Vídeo deletado com sucesso!');
         }
+    }
+    public function like()
+    {
+        $video = Video::findOrFail($id);
+        $user = auth()->user();
 
+        if (!$user->likedVideos->contains($video->id)) {
+            $user->likedVideos()->attach($video->id);
+        }
+
+        return back();
     }
     /**
      * Salva o vídeo || UTILIZAR SYNC PARA CATEGORIAS
@@ -116,14 +122,13 @@ class VideoController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return void
      */
-    private function save(Video $video, Request $request): void 
+    private function save(Video $video, Request $request): void
     {
         $video->title = $request->title;
         $video->description = $request->description;
 
-            
-        if ($request->hasFile('thumbnail')) 
-        {
+
+        if ($request->hasFile('thumbnail')) {
             // Apaga thumbnail antiga, se existir
             if ($video->thumbnail) {
                 Storage::disk('public')->delete($video->thumbnail);
@@ -137,9 +142,8 @@ class VideoController extends Controller
             // Salva o tipo MIME da thumbnail
             $video->thumbnail_mimetype = $thumbnail->getMimeType();
         }
-         
-        if ($request->hasFile('video')) 
-        {
+
+        if ($request->hasFile('video')) {
             // Apaga vídeo antigo, se existir
             if ($video->video) {
                 Storage::disk('public')->delete($video->video);
@@ -152,13 +156,11 @@ class VideoController extends Controller
             $video->video = $videoPath;
             // Salva o tipo MIME do vídeo
             $video->video_mimetype = $videoFile->getMimeType();
-        }    
-        $video->save(); 
-        if ($request->categories) 
-        {
+        }
+        $video->save();
+        if ($request->categories) {
             DB::table('categories_videos')->where('video_id', $video->id)->delete();
-            foreach ($request->categories as $categoryId) 
-            {
+            foreach ($request->categories as $categoryId) {
                 DB::table('categories_videos')->insert([
                     'video_id' => $video->id,
                     'category_id' => $categoryId,
@@ -166,27 +168,26 @@ class VideoController extends Controller
                     'updated_at' => now(),
                 ]);
             }
-
-        } else 
-        {
+        } else {
             DB::table('categories_videos')->where('video_id', $video->id)->delete();
         }
     }
-   
 
-    private function form(Video $video) 
+
+    private function form(Video $video)
     {
         $categories = Category::all();
-        
-        $data = 
-        [
-            'video' => $video,
-            'categories'=> $categories, 
-        ];
-        return view ('pages.video.create-edit', $data) ;
+
+        $data =
+            [
+                'video' => $video,
+                'categories' => $categories,
+            ];
+        return view('pages.video.create-edit', $data);
     }
 
-    private function validation(Request $request) {
+    private function validation(Request $request)
+    {
 
         $validation = Validator::make($request->all(), [
             'title' => 'required|string|max:100',
@@ -205,5 +206,4 @@ class VideoController extends Controller
 
         return $validation;
     }
-
 }

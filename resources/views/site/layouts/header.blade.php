@@ -1,49 +1,38 @@
 <nav class="bg-white shadow fixed top-0 left-0 right-0 z-50">
-  <div class="container mx-auto flex items-center px-4 py-2 nav-spacing">
+  <div class="container mx-auto flex items-center justify-between px-4 py-2 nav-spacing">
     <div class="responsividade-menu">
-      <div class="dropdown">
-        <button
-          class="btn btn-light"
-          type="button"
-          id="dropdownMenuButton"
-          data-bs-toggle="dropdown"
-        >
-          <i class="fa-solid fa-bars fa-lg"></i>
-        </button>
-
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <li><a class="dropdown-item" href="/shorts">Shorts</a></li>
-          <li><a class="dropdown-item" href="/shorts-gostei">Shorts que gostei</a></li>
-          <li><a class="dropdown-item" href="/shorts-nao-gostei">Shorts que não gostei</a></li>
-          <li><a class="dropdown-item" href="/shorts-salvos">Shorts salvos</a></li>
-        </ul>
+      
+      <a href="/" class="kplay-logo">
+        <img src="/storage/logo/duck.music.png" class="logo-duck" />
+        <span>KPlaysy</span>
+      </a>
+      <div class="top-bar">
+        <form action="#" method="GET" class="search-form">
+          <input type="text" name="q" placeholder="Pesquisar" autocomplete="off" />
+          <button type="submit" aria-label="Pesquisar">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="20"
+              width="20"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+            >
+              <path
+                d="M10 2a8 8 0 105.293 14.293l4.707 4.707 1.414-1.414-4.707-4.707A8 8 0 0010 2zm0 2a6 6 0 110 12 6 6 0 010-12z"
+              />
+            </svg>
+          </button>
+        </form>
       </div>
-      <a href="/" class="kplay-logo">KPlaysy</a>
-
-      <form action="#" method="GET" class="search-form">
-        <input type="text" name="q" placeholder="Pesquisar" autocomplete="off" />
-        <button type="submit" aria-label="Pesquisar">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            height="20"
-            width="20"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-          >
-            <path
-              d="M10 2a8 8 0 105.293 14.293l4.707 4.707 1.414-1.414-4.707-4.707A8 8 0 0010 2zm0 2a6 6 0 110 12 6 6 0 010-12z"
-            />
-          </svg>
-        </button>
-      </form>
 
       <ul class="navbar-nav ms-auto flex items-center space-x-4">
         @guest
           <li><a class="nav-link" href="{{ route('login') }}">Entrar</a></li>
         @endguest
-
+        
+        <div class="auth-section">
         @auth
-          <li class="nav-item dropdown relative">
+          <li class="nav-item dropdown relative user-menu">
             <a class="nav-link dropdown-toggle cursor-pointer" data-bs-toggle="dropdown" href="#">
               <i class="fa-solid fa-user-circle fa-lg me-3"></i>
               {{ Auth::user()->name }}
@@ -68,7 +57,9 @@
             </ul>
           </li>
         @endauth
+        </div>
       </ul>
+      </div>
     </div>
   </div>
 </nav>

@@ -5,15 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Category;
-use App\Models\Playlist; 
+use App\Models\Playlist;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany; 
-use Illuminate\Support\Facades\DB; 
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\DB;
 
 class Video extends Model
 {
     use HasFactory;
-    protected $table = 'videos'; 
+    protected $table = 'videos';
 
     protected $fillable = [
         'title',
@@ -33,27 +33,29 @@ class Video extends Model
     public function playlists(): BelongsToMany
     {
         return $this->belongsToMany(Playlist::class, 'videos_playlists')
-                    ->withPivot('order') 
-                    ->withTimestamps(); 
+            ->withPivot('order')
+            ->withTimestamps();
     }
 
-    public static function scopeGetVideos ($query, $pesquisar = null)
+    public static function scopeGetVideos($query, $pesquisar = null)
     {
         $query
-            ->leftJoin ('categories_videos as cv', 'cv.video_id','=', 'videos.id')
-            ->leftJoin ('categories as c', 'c.id', '=', 'cv.category_id')
-            ->select ('videos.*', DB::raw('json_agg(c.name)'))
-            ->groupBy('videos.id'); 
+            ->leftJoin('categories_videos as cv', 'cv.video_id', '=', 'videos.id')
+            ->leftJoin('categories as c', 'c.id', '=', 'cv.category_id')
+            ->select('videos.*', DB::raw('json_agg(c.name)'))
+            ->groupBy('videos.id');
 
-        if ($pesquisar)
-        {
-            $query->where(function($q) use ($pesquisar)
-            {
+        if ($pesquisar) {
+            $query->where(function ($q) use ($pesquisar) {
                 $q->where('videos.title', 'ilike', "%$pesquisar%")
-                  ->orWhere('videos.description', 'ilike', "%$pesquisar%");
+                    ->orWhere('videos.description', 'ilike', "%$pesquisar%");
             });
         }
 
         return $query->orderBy('id')->paginate(10);
+    }
+    public function likedByUser($userId)
+    {
+        return $this->belongsToMany(User::class, 'likes')->where('user_id', $userId);
     }
 }
