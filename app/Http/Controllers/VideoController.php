@@ -105,17 +105,48 @@ class VideoController extends Controller
             return redirect()->route('video.index')->with('success', 'Vídeo deletado com sucesso!');
         }
     }
-    public function like()
+    public function like(Request $request)
     {
-        $video = Video::findOrFail($id);
         $user = auth()->user();
-
-        if (!$user->likedVideos->contains($video->id)) {
-            $user->likedVideos()->attach($video->id);
+        if (!$user) {
+            return response()->json(['error' => 'Usuário não autenticado'], 401);
         }
 
-        return back();
+        $videoId = $request->input('video_id');
+
+        if (!$videoId) {
+            return response()->json(['error' => 'video_id não fornecido'], 422);
+        }
+
+        $video = Video::find($videoId);
+
+        if (!$video) {
+            return response()->json(['error' => 'Vídeo não encontrado'], 404);
+        }
+
+        $like = DB::table('likes')
+            ->where('user_id', $user->id)
+            ->where('video_id', $videoId)
+            ->first();
+
+        if ($like) {
+            // Remove like
+            DB::table('likes')->where('id', $like->id)->delete();
+            return response()->json(['message' => 'Like removido']);
+        } else {
+            // Adiciona like
+            DB::table('likes')->insert([
+                'user_id' => $user->id,
+                'video_id' => $videoId,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+            return response()->json(['message' => 'Like adicionado']);
+        }
     }
+
+
+
     /**
      * Salva o vídeo || UTILIZAR SYNC PARA CATEGORIAS
      * @param \App\Models\Video $video

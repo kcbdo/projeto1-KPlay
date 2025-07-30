@@ -31,6 +31,7 @@
                             <div class="video-side-buttons">
                                 <form method="POST" action="{{ route('videos.like', $video->id) }}">
                                     @csrf
+                                    <input type="hidden" name="video_id" value="{{ $video->id }}">
                                     <button type="submit" class="btn-side">
                                         <i class="fa-regular fa-heart"></i>
                                     </button>
