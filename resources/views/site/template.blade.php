@@ -14,7 +14,7 @@
   <body>
     @include('site.layouts.header')
 
-    <div class="container mx-auto pb-8">
+    <div class="pb-8 pt-75">
       @yield('page-container')
     </div>
   </body>

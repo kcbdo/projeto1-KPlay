@@ -27,7 +27,9 @@
 
       <ul class="navbar-nav ms-auto flex items-center space-x-4">
         @guest
-          <li><a class="nav-link" href="{{ route('login') }}">Entrar</a></li>
+          <div class ="to-enter">
+            <li><a class="nav-link" href="{{ route('login') }}">Entrar</a></li>
+          </div>
         @endguest
         
         <div class="auth-section">

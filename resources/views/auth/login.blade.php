@@ -3,7 +3,8 @@
 
 <div class="container d-flex justify-content-center align-items-center min-vh-100">
   <div class="card card-login p-4 w-100" style="max-width: 400px;">
-     <div class ="kplay-logo mb-3"> KPlaysy </div>
+     <div class ="kplay-logo mb-3"> <img src="/storage/logo/duck.music.png" class="logo-duck" />
+      KPlaysy </div>
 
     <h2></h2>
 
