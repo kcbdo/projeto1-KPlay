@@ -2,12 +2,16 @@
 @section('page-container')
 
 @if (isset($playlist) && $playlist->id)
-    <h1>Editar Playlist</h1>
+    <div class="card-header">
+        <h1>Editar Playlist</h1>
+    </div>
     <form action="{{ route('playlists.update', $playlist->id) }}" method="POST">
         @csrf
         @method('PUT')
 @else
-    <h1>Criar Playlist</h1>
+    <div class="card-header">
+        <h1>Criar Playlist</h1>
+    </div>
     <form action="{{ route('playlists.insert') }}" method="POST">
         @csrf
 @endif
@@ -22,12 +26,13 @@
     </div>
 @endif
 
-<div class="form-group">
-    <div class="card-header">
-        <label>Título</label>
-        <input type="text" name="title" class="form-control"
+<div class="card-body">
+    <div class="form-group">
+        <label for="title">Título</label>
+        <input id="title" type="text" name="title" class="form-control"
             value="{{ old('title', $playlist->title ?? '') }}" placeholder="Digite o título da playlist" required>
-    
+    </div>
+
     <div class="form-group">
         <label for="is_public">Pública?</label>
         <select name="is_public" id="is_public" class="form-control" required>
@@ -48,12 +53,13 @@
         </select>
     </div>
 </div>
-</div>
-<button type="submit" class="btn btn-kat btn-sm">
-    {{ isset($playlist) && $playlist->id ? 'Atualizar' : 'Criar' }}
-</button>
 
-<a href="{{ route('playlists.index') }}" class="btn btn-kat btn-sm">Voltar</a>
+<div class="card-buttons">
+    <button type="submit" class="btn btn-secondary btn-sm">
+        {{ isset($playlist) && $playlist->id ? 'Atualizar' : 'Criar' }}
+    </button>
+    <a href="{{ route('playlists.index') }}" class="btn btn-secondary btn-sm">Voltar</a>
+    </div>
 
 </form>
 @endsection

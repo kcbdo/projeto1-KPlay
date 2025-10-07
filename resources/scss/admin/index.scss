@@ -1,0 +1,471 @@
+@import '../variables.scss';
+
+.admin-root {
+  --panel-bg: #ffffff;
+  --panel-muted: #f5f5f5;
+  --panel-text: #212121;
+  --panel-border: #e0e0e0;
+  --panel-accent: #8ab4f8;
+
+  background: var(--panel-muted);
+  color: var(--panel-text);
+  min-height: 100vh;
+
+  .panel-layout {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    grid-template-rows: 64px 1fr;
+    grid-template-areas:
+      'sidebar header'
+      'sidebar content';
+    min-height: 100vh;
+  }
+
+  .panel-header {
+    grid-area: header;
+    position: sticky;
+    top: 0;
+    height: 64px;
+    background: var(--panel-bg);
+    border-bottom: 1px solid var(--panel-border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    z-index: 5;
+  }
+
+  .panel-sidebar {
+    grid-area: sidebar;
+    position: sticky;
+    top: 0;
+    background: var(--panel-bg);
+    border-right: 1px solid var(--panel-border);
+    height: 100vh;
+    padding: 16px 12px;
+  }
+
+  .panel-nav {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .panel-nav a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    color: var(--panel-text);
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+  }
+
+  .panel-nav a:hover {
+    background: var(--panel-muted);
+  }
+
+  .panel-nav a.is-active {
+    background: rgba(138, 180, 248, 0.15);
+    color: var(--panel-text);
+    border: 1px solid var(--panel-accent);
+  }
+
+  .panel-content {
+    grid-area: content;
+    padding: 20px 24px;
+  }
+
+  .panel-card {
+    background: var(--panel-bg);
+    border: 1px solid var(--panel-border);
+    border-radius: 12px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+    padding: 16px;
+  }
+
+  .panel-card + .panel-card {
+    margin-top: 16px;
+  }
+
+  .panel-title {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0 0 12px;
+    color: var(--panel-text);
+  }
+
+  /* Tabelas do painel */
+  .panel-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--panel-bg);
+    border: 1px solid var(--panel-border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .panel-table thead th {
+    background: var(--panel-muted);
+    color: #606060;
+    text-align: left;
+    font-weight: 600;
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--panel-border);
+  }
+
+  .panel-table tbody td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--panel-border);
+  }
+
+  .panel-table tbody tr:hover {
+    background: #fafafa;
+  }
+
+  /* Formulários */
+  .panel-form {
+    display: grid;
+    gap: 12px;
+  }
+
+  .panel-input {
+    display: block;
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #bdbdbd;
+    border-radius: 8px;
+    outline: none;
+    background: #fff;
+  }
+
+  .panel-input:focus {
+    border-color: var(--panel-accent);
+    box-shadow: 0 0 0 3px rgba(138, 180, 248, 0.25);
+  }
+
+  /* Botões */
+  .btn-panel {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    text-decoration: none;
+    transition:
+      background-color 0.2s ease,
+      box-shadow 0.2s ease,
+      border-color 0.2s ease;
+  }
+
+  .btn-panel.primary {
+    background: var(--panel-accent);
+    color: #fff;
+  }
+
+  .btn-panel.primary:hover {
+    box-shadow: 0 4px 10px rgba(138, 180, 248, 0.35);
+  }
+
+  .btn-panel.ghost {
+    background: transparent;
+    border-color: var(--panel-border);
+    color: var(--panel-text);
+  }
+
+  .btn-panel.ghost:hover {
+    background: var(--panel-muted);
+  }
+}
+
+/* ---- Painel aplicado automaticamente ao template admin (.container.mx-auto) ---- */
+.container.mx-auto {
+  display: block; /* evita herdar flex do site-home */
+  align-items: initial;
+  justify-content: initial;
+  /* cartões e áreas */
+  .card-body {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+    border: 1px solid #e0e0e0;
+    padding: 16px;
+  }
+
+  .card-buttons {
+    display: flex;
+    gap: 10px;
+    margin: 8px 0 16px;
+  }
+
+  /* botões */
+  .btn.btn-primary,
+  .btn.btn-secondary {
+    border-radius: 8px;
+    padding: 8px 14px;
+    border: 1px solid transparent;
+  }
+
+  .btn.btn-primary {
+    background-color: #8ab4f8 !important;
+    color: #ffffff !important;
+  }
+
+  .btn.btn-primary:hover {
+    box-shadow: 0 4px 10px rgba(138, 180, 248, 0.35);
+  }
+
+  .btn.btn-secondary {
+    background-color: #e0e0e0;
+    color: #212121;
+    border-color: #e0e0e0;
+  }
+
+  .btn.btn-secondary:hover {
+    background-color: #bdbdbd;
+  }
+
+  /* tabelas */
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .thead-dark {
+    color: #606060;
+    background-color: #f5f5f5;
+    border-color: #e0e0e0;
+  }
+
+  .thead-dark th {
+    padding: 12px;
+    font-weight: 600;
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+  .kit-kat td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+  .kit-kat tr:nth-child(even) {
+    background: #fafafa;
+  }
+
+  /* dropdown */
+  .dropdown-menu {
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    border-radius: 8px;
+    padding: 6px 0;
+  }
+
+  .dropdown-item {
+    padding: 8px 12px;
+    border-radius: 6px;
+  }
+
+  .dropdown-item:hover {
+    background: #f8f8f8;
+  }
+
+  /* paginação */
+  .pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 16px;
+  }
+
+  .page-item .page-link {
+    border-radius: 6px;
+    color: #606060;
+    border: 1px solid #e0e0e0;
+  }
+
+  .page-item.active .page-link {
+    color: #ffffff;
+    background-color: #606060;
+    border-color: #606060;
+  }
+}
+
+/* ---- Form padrão para páginas de CRUD (Categorias, Vídeos, Playlists) ---- */
+.container.mx-auto .card-header {
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.container.mx-auto .card-body {
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+  padding: 16px;
+}
+
+.container.mx-auto .form-group {
+  margin-bottom: 12px;
+}
+.container.mx-auto label {
+  font-weight: 600;
+  margin-bottom: 6px;
+  display: inline-block;
+}
+.container.mx-auto .form-control {
+  display: block;
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #bdbdbd;
+  border-radius: 8px;
+  outline: none;
+  background: #fff;
+}
+.container.mx-auto .form-control:focus {
+  border-color: #8ab4f8;
+  box-shadow: 0 0 0 3px rgba(138, 180, 248, 0.25);
+}
+
+.container.mx-auto .btn-kat,
+.container.mx-auto .btn.btn-primary,
+.container.mx-auto .btn.btn-secondary {
+  border-radius: 8px;
+  padding: 8px 14px;
+}
+
+/* ---- Navbar do painel ---- */
+nav.bg-white.shadow.fixed {
+  background: #ffffff;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+/* Garantir que o painel possa rolar mesmo se houver regra global de overflow */
+html,
+body {
+  overflow-y: auto !important;
+}
+
+nav .container.mx-auto {
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+}
+
+/* manter visual e proporções atuais da logo */
+nav .kplay-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0;
+}
+
+nav #menu {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex: 1 1 auto; /* ocupa espaço entre logo e usuário */
+  justify-content: center; /* centraliza itens do menu */
+  position: relative; /* base para posicionar o dropdown do usuário */
+}
+
+nav #menu .nav-link {
+  position: relative;
+  color: #667085;
+  text-decoration: none;
+  padding: 12px 10px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+/* sublinhado suave no hover/ativo */
+nav #menu .nav-link::after {
+  content: '';
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: 6px;
+  height: 3px;
+  background: transparent;
+  border-radius: 2px;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition:
+    transform 0.2s ease,
+    background-color 0.2s ease;
+}
+
+nav #menu .nav-link:hover {
+  color: #374151;
+}
+nav #menu .nav-link:hover::after {
+  background: #8ab4f8;
+  transform: scaleX(1);
+}
+
+/* estado ativo */
+nav #menu .nav-link.active,
+nav #menu .nav-link[aria-current='page'] {
+  color: #111827;
+}
+nav #menu .nav-link.active::after,
+nav #menu .nav-link[aria-current='page']::after {
+  background: #8ab4f8;
+  transform: scaleX(1);
+}
+
+nav .dropdown-menu {
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+  z-index: 2000; /* garante sobreposição sobre tabela/conteúdo */
+}
+
+/* Posiciona o bloco do usuário à direita, mantendo o menu centralizado */
+nav #menu > .dropdown {
+  position: absolute;
+  right: 0;
+}
+
+/* Responsividade */
+@media (max-width: 992px) {
+  nav #menu {
+    gap: 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  nav .container.mx-auto {
+    padding: 0 12px;
+  }
+  nav #menu {
+    position: static; /* mantém dentro do nav, não cobre a página */
+    background: transparent;
+    border-bottom: none;
+    padding: 0;
+    gap: 12px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap;
+  }
+  nav #menu li {
+    white-space: nowrap;
+  }
+}

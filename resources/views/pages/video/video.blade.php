@@ -81,7 +81,7 @@
                   class="btn btn-primary btn-sm dropdown-toggle"
                   type="button"
                   id="dropdownMenuButton{{ $video->id }}"
-                  data-toggle="dropdown"
+                  data-bs-toggle="dropdown"
                   aria-haspopup="true"
                   aria-expanded="false"
                 >
