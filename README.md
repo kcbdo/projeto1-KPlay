@@ -1,7 +1,5 @@
 <div align="center">
 
-<img alt="KPlaysy - Plataforma de Reels Infantis" src="public/logo.png" width="120" />
-
 ### KPlaysy — Plataforma de Reels Infantis com Acessibilidade
 
 Experiência segura e inclusiva de vídeos curtos para crianças, incluindo recursos de acessibilidade para crianças PCDs.
