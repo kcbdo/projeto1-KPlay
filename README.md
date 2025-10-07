@@ -1,64 +1,180 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+<div align="center">
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+<img alt="KPlaysy - Plataforma de Reels Infantis" src="public/logo.png" width="120" />
 
-## About Laravel
+### KPlaysy — Plataforma de Reels Infantis com Acessibilidade
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Experiência segura e inclusiva de vídeos curtos para crianças, incluindo recursos de acessibilidade para crianças PCDs.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+</div>
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Visão geral
 
-## Learning Laravel
+O KPlaysy é uma aplicação web construída em Laravel cujo objetivo é oferecer uma plataforma de vídeos curtos (estilo reels) focada no público infantil, com ênfase em acessibilidade e inclusão. O projeto contempla curadoria de conteúdo, playlists e interação por curtidas, além de diretrizes para uma UX segura para crianças.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Principais recursos
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- Conteúdo em formato de vídeos curtos (reels)
+- Listagem de vídeos e playlists
+- Curtidas em vídeos (`POST /videos/like`)
+- Autenticação e sessão com Jetstream/Sanctum
+- Painel inicial (`GET /`) e catálogo de vídeos (`GET /videos`)
+- Acessibilidade dedicada a crianças PCDs (detalhes abaixo)
 
-## Laravel Sponsors
+### Acessibilidade e Inclusão (PCDs)
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+- Legendas e transcrições planejadas para todos os vídeos
+- Contraste adequado e tipografia legível para baixa visão
+- Elementos de foco visível e navegação por teclado
+- Descrições de mídia (texto alternativo) e rótulos claros
+- Controles grandes e com alvo de toque confortável
+- Feedback sonoro/visual opcional para ações (ex.: curtir)
 
-### Premium Partners
+> Observação: nem todos os pontos acima podem estar 100% implementados ainda; veja a seção “Roadmap”.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+---
 
-## Contributing
+## Stack técnica
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+- PHP (Laravel 8.x) — `laravel/framework:^8.75`
+- Jetstream + Livewire — `laravel/jetstream`, `livewire/livewire`
+- Autenticação — `laravel/sanctum`
+- Processamento de vídeo — `php-ffmpeg/php-ffmpeg`
+- Front-end — Blade, Tailwind, Bootstrap 5, jQuery (uso pontual)
+- Build de assets — Laravel Mix (webpack) e Vite presentes no repo; scripts oficiais utilizam Mix
+- Deploy estático de assets — configurado para Vercel (ver `vercel.json`)
 
-## Code of Conduct
+## Começando
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### Pré-requisitos
 
-## Security Vulnerabilities
+- PHP 8.0+ (o projeto suporta ^7.3|^8.0, recomenda-se 8.x)
+- Composer
+- Node.js 18+ e npm
+- MySQL/MariaDB ou outro banco suportado pelo Laravel
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### Instalação
 
-## License
+1. Clone o repositório
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+   ```bash
+   git clone <URL_DO_REPO>
+   cd projeto1-KPlay
+   ```
+
+2. Dependências PHP
+
+   ```bash
+   composer install
+   ```
+
+3. Variáveis de ambiente
+
+   ```bash
+   cp .env.example .env
+   php artisan key:generate
+   ```
+
+   Configure no `.env` o acesso ao banco de dados (DB_HOST, DB_DATABASE, DB_USERNAME, DB_PASSWORD) e URLs.
+
+4. Banco de dados: migrações e seeds
+
+   ```bash
+   php artisan migrate --seed
+   ```
+
+5. Link de storage (para servir uploads públicos)
+
+   ```bash
+   php artisan storage:link
+   ```
+
+6. Dependências JS e build
+
+   ```bash
+   npm install
+   npm run dev
+   # ou
+   npm run production
+   ```
+
+### Executando a aplicação
+
+```bash
+php artisan serve
+```
+
+Acesse `http://localhost:8000`.
+
+Rotas principais:
+
+- `GET /` — página inicial
+- `GET /videos` — listagem de vídeos
+- `POST /videos/like` — curtir vídeo (pode exigir autenticação)
+
+## Scripts úteis (npm)
+
+- `npm run dev` / `npm run production` — build com Laravel Mix (veja `webpack.mix.js`)
+- `npm run watch` — recompilação no desenvolvimento
+- `npm run lint:check` / `npm run lint:fix` — formatação com Prettier (inclui Blade)
+- `npm test` — testes JavaScript com Jest
+
+## Testes
+
+- PHP (PHPUnit):
+
+  ```bash
+  ./vendor/bin/phpunit
+  ```
+
+- JavaScript (Jest):
+  ```bash
+  npm test
+  ```
+
+## Desenvolvimento de Front-end
+
+- Estilos: `resources/scss/` e `resources/css/`
+- Scripts: `resources/js/`
+- Views Blade: `resources/views/`
+- Assets compilados são gerados em `public/`
+
+Observação: há um `vite.config.js`, porém o fluxo oficial deste projeto usa Laravel Mix conforme os scripts do `package.json` e o arquivo `webpack.mix.js`.
+
+## Processamento de Vídeo
+
+O projeto inclui `php-ffmpeg/php-ffmpeg` para operações de vídeo. Dependências do sistema (ex.: FFmpeg) devem estar instaladas no ambiente para funcionalidades de transcodificação, thumbnails, etc.
+
+## Deploy
+
+### Vercel
+
+Este repositório inclui `vercel.json` com:
+
+```json
+{ "buildCommand": "npm install && npm run production", "outputDirectory": "public" }
+```
+
+Como Laravel é uma aplicação PHP, você pode optar por:
+
+- Usar um servidor PHP (VPS/Forge) e apontar o document root para `public/`;
+- Utilizar integrações que suportem Laravel em serverless; ou
+- Hospedar apenas assets estáticos na Vercel e rodar o backend em outro provedor (recomendado).
+
+Para setups gerenciados, considere Laravel Forge, Ploi, Railway, Fly.io ou plataformas com suporte nativo a PHP/Laravel.
+
+## Roadmap de Acessibilidade
+
+- Legendas automáticas e editor de transcrição
+- Modo alto contraste e ajuste de tamanho de fonte persistente
+- Preferências de acessibilidade por perfil da criança
+- Descrições de áudio para vídeos selecionados
+- Testes de usabilidade com crianças PCDs e revisão contínua WCAG 2.2 AA
+
+## Contribuição
+
+Contribuições são bem-vindas! Abra uma issue com sugestões e pontos de acessibilidade. Para PRs, descreva claramente o impacto na UX infantil e em PCDs.
+
+## Licença
+
+Este projeto é distribuído sob a licença MIT. Consulte o arquivo de licença correspondente quando aplicável.
